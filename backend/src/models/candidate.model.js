@@ -17,7 +17,7 @@ const candidateSchema = new mongoose.Schema({
     status:{
         type:String,
         enum:["pending","processed"],
-        default:pending,
+        default:"pending",
     },
     score:Number
 },{timestamps:true});

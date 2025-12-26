@@ -4,7 +4,7 @@ import { authenticate } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-router.post("/init", auth, async (req, res) => {
+router.post("/init", authenticate, async (req, res) => {
   const { uid, email } = req.user;
 
   let company = await Company.findOne({ firebaseUid: uid });

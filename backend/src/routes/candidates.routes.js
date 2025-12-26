@@ -1,9 +1,11 @@
 import express from "express"
 import  { authenticate } from "../middlewares/auth.middleware.js"
 import upload from "../middlewares/upload.middleware.js"
-import {bucket} from "../firebaseAdmin.js"
+import bucket from "../firebaseAdmin.js"
 import Company from "../models/company.model.js"
 import Candidate from "../models/candidate.model.js"
+import Job from "../models/job.model.js"
+import processResume from "../services/resumeProcess.service.js"
 
 const router = express.Router();
 
@@ -42,6 +44,18 @@ router.post(
             email,
             resumeUrl
         });
+
+        const job = await Job.findById(jobId);
+        const result = await processResume(
+            resumeUrl,
+            job.description
+        );
+
+        candidate.score = result.score;
+        candidate.status = result.status||"processed";
+        candidate.summary = result.summary;
+
+        await candidate.save();
 
         res.json(candidate);
     }

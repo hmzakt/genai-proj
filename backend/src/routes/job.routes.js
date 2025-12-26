@@ -7,7 +7,7 @@ import Job from "../models/job.model.js";
 const router = express.Router();
 
 
-router.post("/", auth, async (req, res) => {
+router.post("/", authenticate, async (req, res) => {
   const { title, description } = req.body;
 
   const company = await Company.findOne({
@@ -24,7 +24,7 @@ router.post("/", auth, async (req, res) => {
 });
 
 // List jobs
-router.get("/", auth, async (req, res) => {
+router.get("/", authenticate, async (req, res) => {
   const company = await Company.findOne({
     firebaseUid: req.user.uid,
   });
@@ -33,4 +33,4 @@ router.get("/", auth, async (req, res) => {
   res.json(jobs);
 });
 
-module.exports = router;
+export default router;
