@@ -11,7 +11,7 @@ def normalize_ai_response(ai_response : str):
             "education" : data.get("education",""),
             "summary" : data.get("match_summary",""),
             "score" : score,
-            "status":"Processed"
+            "status":"processed"
         }
     
     except Exception:

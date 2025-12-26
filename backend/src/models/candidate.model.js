@@ -12,12 +12,18 @@ const candidateSchema = new mongoose.Schema({
 
     name:String,
     email:String,
+    
+    batchId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Batch"
+    },
+
     resumeUrl:String,
 
     status:{
         type:String,
-        enum:["pending","processed"],
-        default:"pending",
+        enum:["uploaded","processed"],
+        default:"uploaded",
     },
     score:Number
 },{timestamps:true});
