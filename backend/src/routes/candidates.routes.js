@@ -7,7 +7,8 @@ import Candidate from "../models/candidate.model.js"
 import Job from "../models/job.model.js"
 import processResume from "../services/resumeProcess.service.js"
 import Batch from "../models/batches.model.js"
-import {fetchPdf, downloadPdf} from "../services/driveService.js"
+import downloadPdf from "../services/driveService.js"
+import fetchPdf from "../services/driveService.js"
 const router = express.Router();
 
 
@@ -55,7 +56,7 @@ router.post(
     }
 );
 
-router.post("/batch-upload-gdrive/:batchId", auth, async (req, res) => {
+router.post("/batch-upload-gdrive/:batchId", authenticate, async (req, res) => {
   const { batchId } = req.params;
 
   const batch = await Batch.findById(batchId);

@@ -1,7 +1,7 @@
-import google from "googleapis";
-import oauth2Client from "./googleAuth.js";
+import { google } from "googleapis";
+import googleAuth from "./googleAuth.js";
 
-const drive = google.drive({version : "v3", auth : oauth2Client});
+const drive = google.drive({version : "v3", auth : googleAuth.oauth2Client});
 
 async function fetchPdf(limit){
     const res = await drive.files.list({

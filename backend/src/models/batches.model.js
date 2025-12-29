@@ -4,7 +4,7 @@ const batchSchema = new mongoose.Schema({
     jobId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Job",
-        requuired: true
+        required: true
     },
     companyId: {
         type: mongoose.Schema.Types.ObjectId,
