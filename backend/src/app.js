@@ -6,6 +6,7 @@ import jobRoutes from "./routes/job.routes.js";
 
 import candidateRoutes from "./routes/candidates.routes.js";
 import batchRoutes from "./routes/batches.routes.js"
+import googleAuthRoutes from "./routes/googleAuth.routes.js"
 
 
 const app = express();
@@ -23,4 +24,6 @@ app.use("/jobs", jobRoutes);
 //private routes
 app.use("/candidates", candidateRoutes);
 app.use("/batches", batchRoutes);
+app.use("/auht", googleAuthRoutes);
+
 export default app;

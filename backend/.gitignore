@@ -1,3 +1,4 @@
 .env
 src/serviceAccountKey.json
 /node_modules
+google_client.json

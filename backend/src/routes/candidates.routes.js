@@ -7,59 +7,9 @@ import Candidate from "../models/candidate.model.js"
 import Job from "../models/job.model.js"
 import processResume from "../services/resumeProcess.service.js"
 import Batch from "../models/batches.model.js"
+import {fetchPdf, downloadPdf} from "../services/driveService.js"
 const router = express.Router();
 
-// router.post(
-//     "/upload/:jobId",
-//     authenticate,
-//     upload.single("resume"),
-//     async(req, res)=>{
-//         const {jobId} = req.params;
-//         const {name,email}=req.body;
-
-//         if(!req.file){
-//             return res.status(400).json({message:"Resume file required"})
-//         }
-
-//         const company = await Company.findOne({
-//             firebaseUid:req.user.uid
-//         });
-
-//         const fileName = `resume/${company._id}/${Date.now()}_${req.file.originalname}`;
-//         const file = bucket.file(fileName);
-
-//         await file.save(req.file.buffer,{
-//             metadata:{
-//                 contentType:req.file.mimetype
-//             }
-//         });
-
-//         await file.makePublic();
-//         const resumeUrl = file.publicUrl();
-
-//         const candidate = await Candidate.create({
-//             jobId,
-//             companyId:company._id,
-//             name,
-//             email,
-//             resumeUrl
-//         });
-
-//         const job = await Job.findById(jobId);
-//         const result = await processResume(
-//             resumeUrl,
-//             job.description
-//         );
-
-//         candidate.score = result.score;
-//         candidate.status = result.status||"processed";
-//         candidate.summary = result.summary;
-
-//         await candidate.save();
-
-//         res.json(candidate);
-//     }
-// );
 
 router.post(
     "/batch-upload/:batchId",
@@ -104,5 +54,47 @@ router.post(
         });
     }
 );
+
+router.post("/batch-upload-gdrive/:batchId", auth, async (req, res) => {
+  const { batchId } = req.params;
+
+  const batch = await Batch.findById(batchId);
+  if (!batch) return res.status(404).json({ message: "Batch not found" });
+
+  const company = await Company.findOne({
+    firebaseUid: req.user.uid,
+  });
+
+  const files = await fetchPdf(batch.totalResumes);
+  const candidates = [];
+
+  for (const file of files) {
+    const buffer = await downloadPdf(file.id);
+
+    const fileName = `resumes/${company._id}/${batchId}/${Date.now()}_${file.name}`;
+    const storageFile = bucket.file(fileName);
+
+    await storageFile.save(buffer, {
+      metadata: { contentType: "application/pdf" },
+    });
+
+    await storageFile.makePublic();
+
+    const candidate = await Candidate.create({
+      jobId: batch.jobId,
+      companyId: company._id,
+      batchId: batch._id,
+      resumeUrl: storageFile.publicUrl(),
+    });
+
+    candidates.push(candidate);
+  }
+
+  res.json({
+    source: "google-drive",
+    uploaded: candidates.length,
+    candidates,
+  });
+});
 
 export default router;
