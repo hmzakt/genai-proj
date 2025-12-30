@@ -86,7 +86,7 @@ export default function ResultsPage(props: Props) {
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
                                                 {candidates.map((candidate, index) => (
-                                                    <tr key={candidate.id || index}>
+                                                    <tr key={candidate._id || index}>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                             #{index + 1}
                                                         </td>

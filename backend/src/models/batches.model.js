@@ -25,7 +25,7 @@ const batchSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["pending", "processed"],
+        enum: ["pending", "processing", "completed", "failed"],
         default: "pending",
     }
 }, { timestamps: true });

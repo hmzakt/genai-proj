@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import api from "@/services/api";
 import { useRouter } from "next/navigation";
@@ -18,8 +18,20 @@ export default function CreateBatchPage(props: Props) {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
+    useEffect(() => {
+        if (!jobId || jobId === "undefined") {
+            // Provide immediate feedback if entering page with bad ID
+            console.error("Invalid Job ID detected:", jobId);
+        }
+    }, [jobId]);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!jobId || jobId === "undefined") {
+            alert("Invalid Job ID. Returning to dashboard.");
+            router.push("/dashboard");
+            return;
+        }
         setLoading(true);
         try {
             const response = await api.post<Batch>("/batches/create", {
@@ -27,7 +39,7 @@ export default function CreateBatchPage(props: Props) {
                 source,
                 limit: Number(limit),
             });
-            const batchId = response.data.id;
+            const batchId = response.data._id;
 
             // Redirect based on source to the Resume Ingestion step
             // The instructions say "Resume Ingestion (Based on Source)"

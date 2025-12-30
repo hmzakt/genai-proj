@@ -18,7 +18,7 @@ def process_resume(data:ResumeRequest):
     pdf_response = requests.get(data.resume_url)
     resume_text = extract_text_from_pdf(pdf_response.content)
     raw_res = analyze_resume(resume_text, data.job_description)
-    result = normalize_ai_response(raw_res)
+    result = normalize_ai_response(str(raw_res))
     
     return result
 

@@ -9,15 +9,20 @@ type Props = {
     params: Promise<{ batchId: string }>
 }
 
+import { useBatchProcessing } from "@/context/BatchProcessingContext";
+
+// ... imports
+
 function IngestContent({ batchId }: { batchId: string }) {
     const searchParams = useSearchParams();
     const source = searchParams.get("source") as "local" | "gdrive" || "local";
 
     const [files, setFiles] = useState<FileList | null>(null);
     const [uploading, setUploading] = useState(false);
-    const [processing, setProcessing] = useState(false);
+    // Removed local processing state
     const [uploadComplete, setUploadComplete] = useState(false);
-    const router = useRouter();
+
+    const { startProcessing, isProcessing } = useBatchProcessing();
 
     // Handle File Upload (Local)
     const handleFileUpload = async (e: React.FormEvent) => {
@@ -27,7 +32,7 @@ function IngestContent({ batchId }: { batchId: string }) {
         setUploading(true);
         const formData = new FormData();
         Array.from(files).forEach((file) => {
-            formData.append("resumes[]", file);
+            formData.append("resumes", file);
         });
 
         try {
@@ -65,14 +70,12 @@ function IngestContent({ batchId }: { batchId: string }) {
 
     // Process Batch
     const handleProcess = async () => {
-        setProcessing(true);
         try {
-            await api.post(`/batches/${batchId}/process`);
-            router.push(`/batches/${batchId}/results`);
+            await startProcessing(batchId);
+            // Router push is handled by the widget/context completion now, or user can click View Results
         } catch (error) {
             console.error("Processing failed", error);
             alert("Processing request failed");
-            setProcessing(false);
         }
     };
 
@@ -89,6 +92,7 @@ function IngestContent({ batchId }: { batchId: string }) {
 
                     {source === "local" ? (
                         <form onSubmit={handleFileUpload} className="space-y-6">
+                            {/* ... form content ... */}
                             <div className="border-2 border-dashed border-gray-300 rounded-md p-6 flex justify-center items-center">
                                 <div className="space-y-1 text-center">
                                     <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -128,8 +132,8 @@ function IngestContent({ batchId }: { batchId: string }) {
             {/* Step 2: Process */}
             <div className={`border-t pt-8 ${!uploadComplete ? 'opacity-50 pointer-events-none' : ''}`}>
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Step 2: Process Screening</h3>
-                <button onClick={handleProcess} disabled={processing} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none disabled:bg-gray-400">
-                    {processing ? "Processing Batch..." : "Process Batch"}
+                <button onClick={handleProcess} disabled={isProcessing} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none disabled:bg-gray-400">
+                    Process Batch
                 </button>
             </div>
         </div>

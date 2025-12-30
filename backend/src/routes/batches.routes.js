@@ -3,6 +3,7 @@ import authentication, { authenticate } from "../middlewares/auth.middleware.js"
 import Company from "../models/company.model.js"
 import Batch from "../models/batches.model.js"
 import Candidate from "../models/candidate.model.js";
+import processBatch from "../services/batchProcessing.js";
 
 const router = express.Router();
 
@@ -44,6 +45,18 @@ router.post("/:batchId/process", authenticate, async (req, res) => {
         res.json({ message: "Batch processed successfully" });
     } catch (err) {
         res.status(400).json({ message: err.message });
+    }
+});
+
+router.get("/:batchId", authenticate, async (req, res) => {
+    try {
+        const batch = await Batch.findById(req.params.batchId);
+        if (!batch) {
+            return res.status(404).json({ message: "Batch not found" });
+        }
+        res.json(batch);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching batch", error: error.message });
     }
 });
 

@@ -1,9 +1,20 @@
 import multer from "multer"
 
 const upload = multer({
-    storage:multer.memoryStorage(),
-    limits:{fileSize:5 * 1024 * 1024} // 5MB is current limit
+  storage: multer.memoryStorage(),
+
+    limits: {
+    fileSize: 10 * 1024 * 1024, 
+    files: 200,                
+  },
+
+
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype !== "application/pdf") {
+      cb(new Error("Only PDF files allowed"));
+    }
+    cb(null, true);
+  },
 });
-upload.array("resumes",50);
 
 export default upload;

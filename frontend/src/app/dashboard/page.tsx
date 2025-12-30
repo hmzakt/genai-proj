@@ -27,7 +27,6 @@ export default function DashboardPage() {
             setJobs(response.data);
         } catch (error) {
             console.error("Failed to fetch jobs:", error);
-            // In a real app, handle error visibly
         } finally {
             setLoading(false);
         }
@@ -83,7 +82,7 @@ export default function DashboardPage() {
                         <div className="bg-white shadow overflow-hidden sm:rounded-md">
                             <ul className="divide-y divide-gray-200">
                                 {jobs.map((job) => (
-                                    <li key={job.id}>
+                                    <li key={job._id}>
                                         <div className="block hover:bg-gray-50 transition duration-150 ease-in-out">
                                             <div className="px-4 py-4 sm:px-6">
                                                 <div className="flex items-center justify-between">
@@ -101,7 +100,7 @@ export default function DashboardPage() {
                                                         </p>
                                                     </div>
                                                     <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                                                        <Link href={`/jobs/${job.id}/batches/create`} className="text-indigo-600 hover:text-indigo-900 mr-4">
+                                                        <Link href={`/jobs/${job._id}/batches/create`} className="text-indigo-600 hover:text-indigo-900 mr-4">
                                                             Add Batch
                                                         </Link>
                                                         {/* Link to results/batches could go here */}

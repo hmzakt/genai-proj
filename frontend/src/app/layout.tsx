@@ -10,6 +10,11 @@ export const metadata: Metadata = {
   description: "AI-powered resume screening dashboard",
 };
 
+import { BatchProcessingProvider } from "@/context/BatchProcessingContext";
+import BatchProgressWidget from "@/components/BatchProgressWidget";
+
+// ... imports
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,7 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          {children}
+          <BatchProcessingProvider>
+            {children}
+            <BatchProgressWidget />
+          </BatchProcessingProvider>
         </AuthProvider>
       </body>
     </html>

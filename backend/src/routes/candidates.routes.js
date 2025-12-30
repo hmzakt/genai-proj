@@ -1,59 +1,52 @@
 import express from "express"
-import  { authenticate } from "../middlewares/auth.middleware.js"
+import { authenticate } from "../middlewares/auth.middleware.js"
 import upload from "../middlewares/upload.middleware.js"
-import bucket from "../firebaseAdmin.js"
 import Company from "../models/company.model.js"
 import Candidate from "../models/candidate.model.js"
 import Job from "../models/job.model.js"
 import processResume from "../services/resumeProcess.service.js"
 import Batch from "../models/batches.model.js"
-import downloadPdf from "../services/driveService.js"
-import fetchPdf from "../services/driveService.js"
+import driveService from "../services/driveService.js"
+import storage from "../storage/localStorage.js"
 const router = express.Router();
 
-
 router.post(
-    "/batch-upload/:batchId",
-    authenticate,
-    upload.array("resumes",50),
-    async(req,res)=>{
-        const {batchId} = req.params;
-        const batch = await Batch.findById(batchId);
-        if(!batch){
-            return res.status(400).json({message : "Batch not defined"})
-        };
+  "/batch-upload/:batchId",
+  authenticate,
+  upload.array("resumes", 50),
+  async (req, res) => {
+    const { batchId } = req.params;
+    const batch = await Batch.findById(batchId);
+    if (!batch) {
+      return res.status(400).json({ message: "Batch not defined" })
+    };
 
-        const company = Company.findOne({
-            firebaseUid : req.user.uid
-        });
+    const company = await Company.findOne({
+      firebaseUid: req.user.uid
+    });
 
-        const candidates = [];
+    const candidates = [];
 
-        for (const file of req.files){
-            const fileName = `resume/${company._id}/${batchId}/${Date.now()}_${file.originalname}`;
-            const storageFile = bucket.file(fileName);
+    for (const file of req.files) {
 
-            await storageFile.save(file.buffer, {
-                metadata : {contentType : file.mimetype}
-            });
+      const resumeUrl = await storage.saveFile(file);
+      await storage.cleanupIfNeeded();
 
-            await storageFile.makePublic();
+      const candidate = await Candidate.create({
+        jobId: batch.jobId,
+        companyId: company._id,
+        batchId: batch._id,
+        resumeUrl
+      });
 
-            const candidate  = await Candidate.create({
-                jobId : batch.jobId,
-                companyId : company._id,
-                batchId : batch._id,
-                resumeUrl : storageFile.publicUrl()
-            });
-
-            candidates.push(candidate);
-        }
-
-        res.json({
-            uploaded: candidates.length,
-            candidates
-        });
+      candidates.push(candidate);
     }
+
+    res.json({
+      uploaded: candidates.length,
+      candidates
+    });
+  }
 );
 
 router.post("/batch-upload-gdrive/:batchId", authenticate, async (req, res) => {
@@ -66,26 +59,27 @@ router.post("/batch-upload-gdrive/:batchId", authenticate, async (req, res) => {
     firebaseUid: req.user.uid,
   });
 
-  const files = await fetchPdf(batch.totalResumes);
+  // Use the default export object
+  const files = await driveService.fetchPdf(batch.totalResumes);
   const candidates = [];
 
   for (const file of files) {
-    const buffer = await downloadPdf(file.id);
+    const buffer = await driveService.downloadFile(file.id);
 
-    const fileName = `resumes/${company._id}/${batchId}/${Date.now()}_${file.name}`;
-    const storageFile = bucket.file(fileName);
+    // Mock file object for localStorage.saveFile
+    const mockFile = {
+      originalname: file.name,
+      buffer: buffer
+    };
 
-    await storageFile.save(buffer, {
-      metadata: { contentType: "application/pdf" },
-    });
-
-    await storageFile.makePublic();
+    const resumeUrl = await storage.saveFile(mockFile);
+    await storage.cleanupIfNeeded();
 
     const candidate = await Candidate.create({
       jobId: batch.jobId,
       companyId: company._id,
       batchId: batch._id,
-      resumeUrl: storageFile.publicUrl(),
+      resumeUrl: resumeUrl,
     });
 
     candidates.push(candidate);

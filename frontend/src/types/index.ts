@@ -1,5 +1,5 @@
 export interface Job {
-    id: string;
+    _id: string;
     title: string;
     description: string;
     createdAt: string;
@@ -7,16 +7,16 @@ export interface Job {
 }
 
 export interface Batch {
-    id: string;
+    _id: string;
     jobId: string;
-    source: 'local' | 'drive';
+    source: 'local' | 'gdrive';
     limit: number;
     status: 'pending' | 'processing' | 'completed' | 'failed';
     createdAt: string;
 }
 
 export interface Candidate {
-    id: string;
+    _id: string;
     batchId: string;
     name: string;
     email?: string;
