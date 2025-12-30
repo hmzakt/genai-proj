@@ -15,6 +15,7 @@ export default function ResultsPage(props: Props) {
     const batchId = params.batchId;
     const [candidates, setCandidates] = useState<Candidate[]>([]);
     const [loading, setLoading] = useState(true);
+    const [expandedSummary, setExpandedSummary] = useState<string | null>(null);
 
     useEffect(() => {
         fetchResults();
@@ -91,7 +92,18 @@ export default function ResultsPage(props: Props) {
                                                             #{index + 1}
                                                         </td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            {candidate.name || `Candidate ${index + 1}`}
+                                                            {candidate.resumeUrl ? (
+                                                                <a
+                                                                    href={candidate.resumeUrl}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="text-indigo-600 hover:text-indigo-900 font-medium hover:underline"
+                                                                >
+                                                                    {candidate.name || `Candidate ${index + 1}`}
+                                                                </a>
+                                                            ) : (
+                                                                <span>{candidate.name || `Candidate ${index + 1}`}</span>
+                                                            )}
                                                         </td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">
                                                             {candidate.score}
@@ -101,8 +113,20 @@ export default function ResultsPage(props: Props) {
                                                                 {candidate.status}
                                                             </span>
                                                         </td>
-                                                        <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate" title={candidate.summary}>
-                                                            {candidate.summary}
+                                                        <td className="px-6 py-4 text-sm text-gray-500">
+                                                            <div className="max-w-md">
+                                                                <p className={`${candidate._id === expandedSummary ? '' : 'line-clamp-2'}`}>
+                                                                    {candidate.summary}
+                                                                </p>
+                                                                {candidate.summary && candidate.summary.length > 100 && (
+                                                                    <button
+                                                                        onClick={() => setExpandedSummary(expandedSummary === candidate._id ? null : candidate._id)}
+                                                                        className="text-indigo-600 hover:text-indigo-900 text-xs mt-1 font-medium"
+                                                                    >
+                                                                        {expandedSummary === candidate._id ? 'Show less' : 'Show more'}
+                                                                    </button>
+                                                                )}
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 ))}
