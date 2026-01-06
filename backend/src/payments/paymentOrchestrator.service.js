@@ -2,9 +2,9 @@ import PayrollRun from "../models/paymentSystem/payrollRun.model.js";
 import PayrollItem from "../models/paymentSystem/payrollItem.model.js";
 import BankAccount from "../models/paymentSystem/bankAccount.model.js"
 import PaymentLog from "../models/paymentSystem/paymentLog.model.js"
-import DummyAdapter from "./dummy.adapter.js";
+import StripeAdapter from "./stripe.adapter.js";
 
-const paymentAdapter = new DummyAdapter();
+const paymentAdapter = new StripeAdapter();
 
 export async function executePayrollPayments(payrollRunId){
     const payrollRun = await PayrollRun.findById(payrollRunId);

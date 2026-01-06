@@ -13,6 +13,8 @@ const bankAccountSchema = new mongoose.Schema(
     bankName: { type: String },
     isPrimary: { type: Boolean, default: true },
     verified: { type: Boolean, default: false },
+    stripeAccountId : { type: String },
+    stripeBankToken : { type: String }
   },
   { timestamps: true }
 );
