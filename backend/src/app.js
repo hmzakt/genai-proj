@@ -7,7 +7,7 @@ import jobRoutes from "./routes/job.routes.js";
 import candidateRoutes from "./routes/candidates.routes.js";
 import batchRoutes from "./routes/batches.routes.js"
 import googleAuthRoutes from "./routes/googleAuth.routes.js"
-
+import payrollRoutes from "./routes/payroll.routes.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -35,5 +35,6 @@ app.use("/jobs", jobRoutes);
 app.use("/candidates", candidateRoutes);
 app.use("/batches", batchRoutes);
 app.use("/auth", googleAuthRoutes);
+app.use("/api/payroll", payrollRoutes);
 
 export default app;
