@@ -1,4 +1,4 @@
-import PayrollRun from "../models/PayrollRun.model.js";
+import PayrollRun from "../models/paymentSystem/payrollRun.model.js";
 
 export async function approvePayroll(payrollRunId, approverId) {
   const payrollRun = await PayrollRun.findById(payrollRunId);

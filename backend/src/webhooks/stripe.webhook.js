@@ -25,7 +25,7 @@ export default async function stripeWebhook(req, res) {
 
   try {
     switch (event.type) {
- 
+
       case "transfer.paid": {
         const transfer = event.data.object;
 
@@ -60,12 +60,20 @@ export default async function stripeWebhook(req, res) {
 
         break;
       }
+
+
       case "account.updated": {
         const account = event.data.object;
 
-        console.log(
-          `Stripe account ${account.id} updated. Charges enabled: ${account.charges_enabled}`
+        const status = account.charges_enabled
+          ? "COMPLETE"
+          : "PENDING";
+
+        await BankAccount.findOneAndUpdate(
+          { stripeAccountId: account.id },
+          { onboardingStatus: status }
         );
+
         break;
       }
 

@@ -8,6 +8,8 @@ export default function Sidebar() {
 
     const links = [
         { href: "/dashboard", label: "Dashboard" },
+        { href: "/payroll", label: "Payroll" },
+        { href: "/employees", label: "Employees" },
         // Add other links here if needed
     ];
 
@@ -24,8 +26,8 @@ export default function Sidebar() {
                             key={link.href}
                             href={link.href}
                             className={`block px-4 py-2 rounded-md transition-colors ${isActive
-                                    ? "bg-indigo-600 text-white"
-                                    : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                                ? "bg-indigo-600 text-white"
+                                : "text-gray-300 hover:bg-gray-700 hover:text-white"
                                 }`}
                         >
                             {link.label}

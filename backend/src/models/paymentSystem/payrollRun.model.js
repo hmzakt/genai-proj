@@ -9,8 +9,8 @@ const payrollRunSchema = new mongoose.Schema(
       enum: ["DRAFT", "REVIEWED", "APPROVED", "PAID"],
       default: "DRAFT",
     },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    approvedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    createdBy: { type: String }, // Firebase UID
+    approvedBy: { type: String }, // Firebase UID
     approvedAt: { type: Date },
     locked: { type: Boolean, default: false },
   },

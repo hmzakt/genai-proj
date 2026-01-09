@@ -6,59 +6,69 @@ import StripeAdapter from "./stripe.adapter.js";
 
 const paymentAdapter = new StripeAdapter();
 
-export async function executePayrollPayments(payrollRunId){
+export async function executePayrollPayments(payrollRunId) {
     const payrollRun = await PayrollRun.findById(payrollRunId);
 
-    if(!payrollRun) throw new Error("Payroll run not found");
+    if (!payrollRun) throw new Error("Payroll run not found");
 
-    if(payrollRun.status !== "APPROVED"){
+    if (payrollRun.status !== "APPROVED") {
         throw new Error("payroll must be APPROVED before payment");
-    } 
+    }
 
     const payrollItems = await PayrollItem.find({
         payrollRunId
     }).populate("employeeId");
 
-    for(const item of payrollItems){
+    for (const item of payrollItems) {
         try {
             const bankAccount = await BankAccount.findOne({
-                employeeId : item.employeeId._id,
-                isPrimary : true,
-                verified : true
+                employeeId: item.employeeId._id,
+                isPrimary: true,
+                verified: true
             });
 
-            if(!bankAccount){
-                throw new Error("Verified bank account not found");
+            if (
+                !bankAccount ||
+                bankAccount.onboardingStatus !== "COMPLETE"
+            ) {
+                await PaymentLog.create({
+                    payrollItemId: item._id,
+                    provider: "STRIPE",
+                    amount: item.netPay,
+                    status: "PENDING_ONBOARDING",
+                    rawResponse: { reason: "Stripe onboarding incomplete" },
+                });
+                continue;
             }
 
             const response = await paymentAdapter.transfer({
-                amount:item.netPay,
+                amount: item.netPay,
                 bankAccount,
-                reference : item._id.toString()
+                reference: item._id.toString()
             });
 
             await PaymentLog.create({
-                payrollItemId : item._id,
-                provider : "DUMMY",
-                transactionId : response.transactionId,      
-                amount : item.netPay,
-                status : response.success? "SUCCESS" : "FAILED",
-                rawResponse : response.raw     
+                payrollItemId: item._id,
+                provider: "DUMMY",
+                transactionId: response.transactionId,
+                amount: item.netPay,
+                status: response.success ? "SUCCESS" : "FAILED",
+                rawResponse: response.raw
             });
-        } catch(err){
+        } catch (err) {
             await PaymentLog.create({
-                payrollItemId : item._id,
-                provider : "DUMMY",
-                amount : item.netPay,
-                status : "FAILED",
-                rawResponse : {error : err.message}
+                payrollItemId: item._id,
+                provider: "DUMMY",
+                amount: item.netPay,
+                status: "FAILED",
+                rawResponse: { error: err.message }
             });
         }
     }
     payrollRun.status = "PAID";
     await payrollRun.save();
 
-    return { success : true};
+    return { success: true };
 }
 
 
