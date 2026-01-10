@@ -10,6 +10,7 @@ export default function Sidebar() {
         { href: "/dashboard", label: "Dashboard" },
         { href: "/payroll", label: "Payroll" },
         { href: "/employees", label: "Employees" },
+        { href: "/ai/hr-chat", label: "AI HR Chat" },
         // Add other links here if needed
     ];
 
