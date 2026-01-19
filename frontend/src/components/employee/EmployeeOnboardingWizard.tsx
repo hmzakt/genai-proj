@@ -71,22 +71,21 @@ export default function EmployeeOnboardingWizard() {
     const handleBankAccountSubmit = (
         data: Omit<BankAccountFormData, "employeeId">
     ) => {
-        createBankAccountMutation.mutate({
-            ...data,
-            employeeId,
-        });
+        // Directly call Cashfree onboarding with bank account data
+        handleCashfreeOnboarding(data);
     };
 
-    const handleStripeOnboarding = async () => {
+    const handleCashfreeOnboarding = async (bankAccountData: any) => {
         try {
-            const result = await employeeApi.startStripeOnboarding({
+            const result = await employeeApi.startCashfreeOnboarding({
                 employeeId,
-                returnUrl: `${window.location.origin}/employees`,
+                bankAccountData,
             });
-            // Open Stripe onboarding in new tab
-            window.open(result.onboardingUrl, "_blank");
+            alert("Cashfree beneficiary created successfully!");
+            queryClient.invalidateQueries({ queryKey: ["employees"] });
+            router.push("/employees");
         } catch (error: any) {
-            alert(error.response?.data?.error || "Failed to start Stripe onboarding");
+            alert(error.response?.data?.error || "Failed to create Cashfree beneficiary");
         }
     };
 
@@ -142,8 +141,7 @@ export default function EmployeeOnboardingWizard() {
                             employeeId={employeeId}
                             onSubmit={handleBankAccountSubmit}
                             onBack={() => setCurrentStep(2)}
-                            onStartStripeOnboarding={handleStripeOnboarding}
-                            isSubmitting={createBankAccountMutation.isPending}
+                            isSubmitting={false}
                         />
                         {createBankAccountMutation.isError && (
                             <div className="mt-4 p-3 bg-red-50 text-red-700 rounded-md text-sm">

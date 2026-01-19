@@ -6,8 +6,8 @@ import {
     PayrollProfileFormData,
     BankAccountFormData,
     IncentivePlan,
-    StripeOnboardingRequest,
-    StripeOnboardingResponse,
+    CashfreeOnboardingRequest,
+    CashfreeOnboardingResponse,
     PayrollProfile,
     BankAccount,
 } from "@/types/employee";
@@ -56,11 +56,11 @@ export const employeeApi = {
         return response.data;
     },
 
-    // Start Stripe onboarding
-    startStripeOnboarding: async (
-        data: StripeOnboardingRequest
-    ): Promise<StripeOnboardingResponse> => {
-        const response = await api.post("/api/employees/stripe/onboard", data);
+    // Start Cashfree onboarding
+    startCashfreeOnboarding: async (
+        data: CashfreeOnboardingRequest
+    ): Promise<CashfreeOnboardingResponse> => {
+        const response = await api.post("/api/employees/cashfree/onboard", data);
         return response.data;
     },
 

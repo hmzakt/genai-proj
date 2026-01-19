@@ -6,7 +6,7 @@ import {
     updateEmployee,
     createPayrollProfileController,
     createBankAccountController,
-    startStripeOnboardingController,
+    startCashfreeOnboardingController,
     listIncentivePlans,
 } from "../controllers/employee.controller.js";
 import { authenticate } from "../middlewares/auth.middleware.js";
@@ -28,8 +28,8 @@ router.post("/payroll-profiles", createPayrollProfileController);
 // Bank account routes
 router.post("/bank-accounts", createBankAccountController);
 
-// Stripe onboarding
-router.post("/stripe/onboard", startStripeOnboardingController);
+// Cashfree onboarding
+router.post("/cashfree/onboard", startCashfreeOnboardingController);
 
 // Incentive plans
 router.get("/incentive-plans/list", listIncentivePlans);

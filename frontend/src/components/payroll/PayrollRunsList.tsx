@@ -139,7 +139,7 @@ export default function PayrollRunsList() {
                 return {
                     title: "Execute Payments",
                     message:
-                        "Are you sure you want to execute Stripe payments for this payroll run? This action cannot be undone.",
+                        "Are you sure you want to execute Cashfree payments for this payroll run? This action cannot be undone.",
                     confirmText: "Execute Payments",
                 };
             default:

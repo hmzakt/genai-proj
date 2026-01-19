@@ -1,6 +1,6 @@
 import { createEmployee } from "../services/emploee.service.js";
 import { createPayrollProfile } from "../services/payrollProfile.service.js";
-import { startStripeOnboarding } from "../services/stripeOnboarding.service.js";
+import { startCashfreeOnboarding } from "../services/cashfreeOnboarding.service.js";
 import Employee from "../models/paymentSystem/employee.model.js";
 import PayrollProfile from "../models/paymentSystem/payrollProfile.model.js";
 import BankAccount from "../models/paymentSystem/bankAccount.model.js";
@@ -91,17 +91,17 @@ export async function createBankAccountController(req, res) {
     }
 }
 
-// Start Stripe onboarding
-export async function startStripeOnboardingController(req, res) {
+// Start Cashfree onboarding
+export async function startCashfreeOnboardingController(req, res) {
     try {
-        const { employeeId, returnUrl } = req.body;
+        const { employeeId, bankAccountData } = req.body;
 
         const employee = await Employee.findById(employeeId);
         if (!employee) {
             return res.status(404).json({ error: "Employee not found" });
         }
 
-        const result = await startStripeOnboarding(employee, returnUrl);
+        const result = await startCashfreeOnboarding(employee, bankAccountData);
         res.json(result);
     } catch (err) {
         res.status(400).json({ error: err.message });

@@ -7,7 +7,6 @@ interface BankAccountFormProps {
     employeeId: string;
     onSubmit: (data: Omit<BankAccountFormData, "employeeId">) => void;
     onBack: () => void;
-    onStartStripeOnboarding?: () => void;
     isSubmitting?: boolean;
     initialData?: Partial<BankAccountFormData>;
 }
@@ -16,7 +15,6 @@ export default function BankAccountForm({
     employeeId,
     onSubmit,
     onBack,
-    onStartStripeOnboarding,
     isSubmitting = false,
     initialData,
 }: BankAccountFormProps) {
@@ -140,25 +138,6 @@ export default function BankAccountForm({
                 </div>
             </div>
 
-            {onStartStripeOnboarding && (
-                <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
-                    <h4 className="text-sm font-medium text-blue-900 mb-2">
-                        Stripe Payment Setup (Optional)
-                    </h4>
-                    <p className="text-sm text-blue-700 mb-3">
-                        Connect this employee to Stripe for automated salary payments.
-                    </p>
-                    <button
-                        type="button"
-                        onClick={onStartStripeOnboarding}
-                        className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
-                        disabled={isSubmitting}
-                    >
-                        Start Stripe Onboarding
-                    </button>
-                </div>
-            )}
-
             <div className="flex justify-between">
                 <button
                     type="button"
@@ -173,7 +152,7 @@ export default function BankAccountForm({
                     className="px-6 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isSubmitting}
                 >
-                    {isSubmitting ? "Completing..." : "Complete Onboarding"}
+                    {isSubmitting ? "Creating Beneficiary..." : "Complete Onboarding"}
                 </button>
             </div>
         </form>

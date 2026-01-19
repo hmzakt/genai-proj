@@ -2,9 +2,9 @@ import PayrollRun from "../models/paymentSystem/payrollRun.model.js";
 import PayrollItem from "../models/paymentSystem/payrollItem.model.js";
 import BankAccount from "../models/paymentSystem/bankAccount.model.js"
 import PaymentLog from "../models/paymentSystem/paymentLog.model.js"
-import StripeAdapter from "./stripe.adapter.js";
+import CashfreeAdapter from "./cashfree.adapter.js";
 
-const paymentAdapter = new StripeAdapter();
+const paymentAdapter = new CashfreeAdapter();
 
 export async function executePayrollPayments(payrollRunId) {
     const payrollRun = await PayrollRun.findById(payrollRunId);
@@ -33,10 +33,10 @@ export async function executePayrollPayments(payrollRunId) {
             ) {
                 await PaymentLog.create({
                     payrollItemId: item._id,
-                    provider: "STRIPE",
+                    provider: "CASHFREE",
                     amount: item.netPay,
                     status: "PENDING_ONBOARDING",
-                    rawResponse: { reason: "Stripe onboarding incomplete" },
+                    rawResponse: { reason: "Cashfree onboarding incomplete" },
                 });
                 continue;
             }
@@ -49,7 +49,7 @@ export async function executePayrollPayments(payrollRunId) {
 
             await PaymentLog.create({
                 payrollItemId: item._id,
-                provider: "DUMMY",
+                provider: "CASHFREE",
                 transactionId: response.transactionId,
                 amount: item.netPay,
                 status: response.success ? "SUCCESS" : "FAILED",
@@ -58,7 +58,7 @@ export async function executePayrollPayments(payrollRunId) {
         } catch (err) {
             await PaymentLog.create({
                 payrollItemId: item._id,
-                provider: "DUMMY",
+                provider: "CASHFREE",
                 amount: item.netPay,
                 status: "FAILED",
                 rawResponse: { error: err.message }

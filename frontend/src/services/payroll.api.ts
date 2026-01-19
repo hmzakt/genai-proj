@@ -38,7 +38,7 @@ export const payrollApi = {
         return response.data;
     },
 
-    // Execute payments via Stripe
+    // Execute payments via Cashfree
     payPayroll: async (payrollRunId: string): Promise<any> => {
         const response = await api.post(`/api/payroll/${payrollRunId}/pay`);
         return response.data;

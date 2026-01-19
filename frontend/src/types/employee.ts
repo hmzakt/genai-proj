@@ -40,8 +40,8 @@ export interface BankAccount {
     bankName?: string;
     isPrimary: boolean;
     verified: boolean;
-    stripeAccountId?: string;
-    stripeBankToken?: string;
+    cashfreeBeneficiaryId?: string;
+    onboardingStatus?: "PENDING" | "COMPLETE";
     createdAt: string;
     updatedAt: string;
 }
@@ -95,13 +95,18 @@ export interface BankAccountFormData {
     bankName?: string;
 }
 
-export interface StripeOnboardingRequest {
+export interface CashfreeOnboardingRequest {
     employeeId: string;
-    returnUrl: string;
+    bankAccountData: {
+        accountHolderName: string;
+        accountNumber: string;
+        ifscCode: string;
+        bankName?: string;
+    };
 }
 
-export interface StripeOnboardingResponse {
-    onboardingUrl: string;
-    stripeAccountId: string;
+export interface CashfreeOnboardingResponse {
+    cashfreeBeneficiaryId: string;
     bankAccountId: string;
+    success: boolean;
 }
