@@ -43,4 +43,10 @@ export const payrollApi = {
         const response = await api.post(`/api/payroll/${payrollRunId}/pay`);
         return response.data;
     },
+
+    // Retry failed payments
+    retryPayroll: async (payrollRunId: string): Promise<any> => {
+        const response = await api.post(`/api/payroll/${payrollRunId}/retry`);
+        return response.data;
+    },
 };

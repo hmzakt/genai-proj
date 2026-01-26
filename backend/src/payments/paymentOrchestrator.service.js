@@ -11,8 +11,8 @@ export async function executePayrollPayments(payrollRunId) {
 
     if (!payrollRun) throw new Error("Payroll run not found");
 
-    if (payrollRun.status !== "APPROVED") {
-        throw new Error("payroll must be APPROVED before payment");
+    if (payrollRun.status !== "APPROVED" && payrollRun.status !== "PAID") {
+        throw new Error("Payroll must be APPROVED or already processed to retry payments");
     }
 
     const payrollItems = await PayrollItem.find({
@@ -20,6 +20,12 @@ export async function executePayrollPayments(payrollRunId) {
     }).populate("employeeId");
 
     for (const item of payrollItems) {
+        // Skip if already paid successfully
+        const existingPayment = await PaymentLog.findOne({
+            payrollItemId: item._id,
+            status: "SUCCESS"
+        });
+        if (existingPayment) continue;
         try {
             const bankAccount = await BankAccount.findOne({
                 employeeId: item.employeeId._id,

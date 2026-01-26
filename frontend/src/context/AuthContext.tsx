@@ -7,9 +7,11 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     signOut,
+    sendEmailVerification,
+    signInWithPopup,
     IdTokenResult,
 } from "firebase/auth";
-import { auth } from "../services/firebase";
+import { auth, googleProvider } from "../services/firebase";
 import { useRouter } from "next/navigation";
 import api from "@/services/api";
 
@@ -18,6 +20,7 @@ interface AuthContextType {
     loading: boolean;
     login: (email: string, password: string) => Promise<void>;
     signup: (email: string, password: string) => Promise<void>;
+    signInWithGoogle: () => Promise<void>;
     logout: () => Promise<void>;
     getToken: () => Promise<string | undefined>;
 }
@@ -44,22 +47,39 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, [router]);
 
     const login = async (email: string, password: string) => {
-        await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+        // Check if email is verified
+        if (!userCredential.user.emailVerified) {
+            await signOut(auth);
+            throw new Error("Please verify your email before logging in. Check your inbox for the verification link.");
+        }
+
         try {
             await api.post("/company/init");
         } catch (err) {
             console.error("Failed to init company", err);
-            // Proceed anyway? Or block? 
-            // If init fails, dashboard might fail too. 
-            // But maybe it already exists and error is benign? 
-            // The backend code says "if (!company) create... return company".
-            // So it should be safe.
         }
         router.push("/dashboard");
     };
 
     const signup = async (email: string, password: string) => {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+        // Send verification email
+        await sendEmailVerification(userCredential.user);
+
+        // Sign out the user until they verify their email
+        await signOut(auth);
+
+        // Throw a special message that the signup page will catch
+        throw new Error("VERIFICATION_EMAIL_SENT");
+    };
+
+    const signInWithGoogle = async () => {
+        const result = await signInWithPopup(auth, googleProvider);
+
+        // Google users are automatically verified
         try {
             await api.post("/company/init");
         } catch (err) {
@@ -78,7 +98,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, login, signup, logout, getToken }}>
+        <AuthContext.Provider value={{ user, loading, login, signup, signInWithGoogle, logout, getToken }}>
             {!loading && children}
         </AuthContext.Provider>
     );

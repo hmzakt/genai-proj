@@ -57,6 +57,15 @@ export async function payPayroll(req, res) {
     }
 }
 
+export async function retryPayroll(req, res) {
+    try {
+        const result = await executePayrollPayments(req.params.id);
+        res.json(result);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+}
+
 
 export async function listPayrollRuns(req, res) {
     const runs = await PayrollRun.find().sort({ createdAt: -1 });

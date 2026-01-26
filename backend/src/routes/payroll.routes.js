@@ -6,6 +6,7 @@ import {
   payPayroll,
   listPayrollRuns,
   getPayrollItems,
+  retryPayroll,
 } from "../controllers/payroll.controller.js";
 import { authenticate } from "../middlewares/auth.middleware.js";
 
@@ -21,5 +22,6 @@ router.get("/:id/items", getPayrollItems);
 router.post("/:id/review", reviewPayroll);
 router.post("/:id/approve", approvePayrollRun);
 router.post("/:id/pay", payPayroll);
+router.post("/:id/retry", retryPayroll);
 
 export default router;

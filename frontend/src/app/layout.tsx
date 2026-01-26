@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { BatchProcessingProvider } from "@/context/BatchProcessingContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import BatchProgressWidget from "@/components/BatchProgressWidget";
 import QueryProvider from "@/components/QueryProvider";
 
@@ -19,16 +20,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const theme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (theme === 'dark' || (!theme && prefersDark)) {
+                  document.documentElement.classList.add('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body className={inter.className}>
-        <AuthProvider>
-          <QueryProvider>
-            <BatchProcessingProvider>
-              {children}
-              <BatchProgressWidget />
-            </BatchProcessingProvider>
-          </QueryProvider>
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <QueryProvider>
+              <BatchProcessingProvider>
+                {children}
+                <BatchProgressWidget />
+              </BatchProcessingProvider>
+            </QueryProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
