@@ -62,7 +62,7 @@ export default function SignupPage() {
     const passwordStrength = getPasswordStrength();
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="min-h-screen bg-white dark:bg-gray-900">
             <Navbar />
 
             <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">

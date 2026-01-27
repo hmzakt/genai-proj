@@ -43,7 +43,7 @@ export default function PayrollItemsTable({
     if (isLoading) {
         return (
             <div className="flex items-center justify-center h-64">
-                <div className="text-gray-500">Loading payroll items...</div>
+                <div className="text-gray-500 dark:text-gray-400">Loading payroll items...</div>
             </div>
         );
     }
@@ -51,7 +51,7 @@ export default function PayrollItemsTable({
     if (error) {
         return (
             <div className="flex items-center justify-center h-64">
-                <div className="text-red-600">
+                <div className="text-red-600 dark:text-red-400">
                     Error loading payroll items. Please try again.
                 </div>
             </div>
@@ -68,77 +68,77 @@ export default function PayrollItemsTable({
     return (
         <div>
             {hasFailedPayments && (
-                <div className="p-4 bg-red-50 border-b border-red-200 flex justify-between items-center">
+                <div className="p-4 bg-red-50 dark:bg-red-900/20 border-b border-red-200 dark:border-red-800 flex justify-between items-center">
                     <div className="flex items-center">
-                        <svg className="h-5 w-5 text-red-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <svg className="h-5 w-5 text-red-600 dark:text-red-400 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                         </svg>
-                        <span className="text-red-700 text-sm font-medium">
+                        <span className="text-red-700 dark:text-red-300 text-sm font-medium">
                             Some payments failed or are pending onboarding.
                         </span>
                     </div>
                     <button
                         onClick={handleRetry}
                         disabled={isRetrying}
-                        className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 disabled:opacity-50"
+                        className="px-4 py-2 text-sm font-medium text-white bg-red-600 dark:bg-red-600 rounded-md hover:bg-red-700 dark:hover:bg-red-700 disabled:opacity-50"
                     >
                         {isRetrying ? "Retrying..." : "Retry Failed Payments"}
                     </button>
                 </div>
             )}
             <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Employee
                             </th>
-                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Base Salary
                             </th>
-                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Incentives
                             </th>
-                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Tax
                             </th>
-                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Net Pay
                             </th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Payment Status
                             </th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                         {items && items.length > 0 ? (
                             items.map((item) => (
-                                <tr key={item._id} className="hover:bg-gray-50">
+                                <tr key={item._id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        <div className="text-sm font-medium text-gray-900">
+                                        <div className="text-sm font-medium text-gray-900 dark:text-white">
                                             {item.employeeId?.name || "Unknown"}
                                         </div>
-                                        <div className="text-sm text-gray-500">
+                                        <div className="text-sm text-gray-600 dark:text-gray-300">
                                             {item.employeeId?.email || ""}
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-right">
                                         {formatCurrency(item.baseSalary, item.currency)}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-right">
                                         {formatCurrency(item.incentive, item.currency)}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-right">
                                         {formatCurrency(item.tax, item.currency)}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900 text-right">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900 dark:text-white text-right">
                                         {formatCurrency(item.netPay, item.currency)}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         {item.paymentStatus ? (
                                             <StatusBadge status={item.paymentStatus as PaymentStatus} />
                                         ) : (
-                                            <span className="text-sm text-gray-400">N/A</span>
+                                            <span className="text-sm text-gray-400 dark:text-gray-500">N/A</span>
                                         )}
                                     </td>
                                 </tr>
@@ -147,7 +147,7 @@ export default function PayrollItemsTable({
                             <tr>
                                 <td
                                     colSpan={6}
-                                    className="px-6 py-8 text-center text-sm text-gray-500"
+                                    className="px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400"
                                 >
                                     No payroll items found for this run.
                                 </td>

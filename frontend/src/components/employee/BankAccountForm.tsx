@@ -66,27 +66,27 @@ export default function BankAccountForm({
         <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Account Holder Name <span className="text-red-500">*</span>
                     </label>
                     <input
                         type="text"
                         value={formData.accountHolderName}
                         onChange={(e) => handleChange("accountHolderName", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900 ${errors.accountHolderName ? "border-red-500" : "border-gray-300"
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 ${errors.accountHolderName ? "border-red-500 dark:border-red-500" : ""
                             }`}
                         placeholder="John Doe"
                         disabled={isSubmitting}
                     />
                     {errors.accountHolderName && (
-                        <p className="mt-1 text-sm text-red-600">
+                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                             {errors.accountHolderName}
                         </p>
                     )}
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Account Number <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -104,7 +104,7 @@ export default function BankAccountForm({
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         IFSC Code <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -113,7 +113,7 @@ export default function BankAccountForm({
                         onChange={(e) =>
                             handleChange("ifscCode", e.target.value.toUpperCase())
                         }
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900 ${errors.ifscCode ? "border-red-500" : "border-gray-300"
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 ${errors.ifscCode ? "border-red-500 dark:border-red-500" : ""
                             }`}
                         placeholder="SBIN0001234"
                         disabled={isSubmitting}
@@ -124,14 +124,14 @@ export default function BankAccountForm({
                 </div>
 
                 <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Bank Name (Optional)
                     </label>
                     <input
                         type="text"
                         value={formData.bankName}
                         onChange={(e) => handleChange("bankName", e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                         placeholder="State Bank of India"
                         disabled={isSubmitting}
                     />
@@ -142,14 +142,14 @@ export default function BankAccountForm({
                 <button
                     type="button"
                     onClick={onBack}
-                    className="px-6 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                    className="px-6 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600"
                     disabled={isSubmitting}
                 >
                     Back
                 </button>
                 <button
                     type="submit"
-                    className="px-6 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-6 py-2 text-sm font-medium text-white bg-green-600 dark:bg-green-600 rounded-md hover:bg-green-700 dark:hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isSubmitting}
                 >
                     {isSubmitting ? "Creating Beneficiary..." : "Complete Onboarding"}

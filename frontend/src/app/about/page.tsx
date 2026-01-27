@@ -5,20 +5,20 @@ import Footer from "@/components/landing/Footer";
 
 export default function AboutPage() {
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white dark:bg-gray-900">
             <Navbar />
 
             <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">
-                        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
                             About{" "}
-                            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                            <span className="text-indigo-600 dark:text-indigo-400">
                                 Our Mission
                             </span>
                         </h1>
-                        <p className="text-xl text-gray-600">
+                        <p className="text-xl text-gray-600 dark:text-gray-300">
                             We're on a mission to revolutionize the hiring process with
                             AI-powered intelligence.
                         </p>
@@ -26,23 +26,23 @@ export default function AboutPage() {
 
                     {/* Story Section */}
                     <div className="mb-16">
-                        <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 md:p-12">
-                            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                        <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 md:p-12">
+                            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                                 Our Story
                             </h2>
-                            <p className="text-gray-700 mb-4 leading-relaxed">
+                            <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
                                 Founded in 2024, HR AI Platform was born from a simple
                                 observation: hiring teams spend countless hours manually
                                 screening resumes, often missing great candidates due to time
                                 constraints and unconscious bias.
                             </p>
-                            <p className="text-gray-700 mb-4 leading-relaxed">
+                            <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
                                 We believed there had to be a better way. By combining
                                 cutting-edge artificial intelligence with deep HR expertise, we
                                 created a platform that not only saves time but also improves
                                 the quality of hiring decisions.
                             </p>
-                            <p className="text-gray-700 leading-relaxed">
+                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                                 Today, we're proud to serve over 500 companies worldwide,
                                 helping them find the right talent faster and more efficiently
                                 than ever before.
@@ -52,12 +52,12 @@ export default function AboutPage() {
 
                     {/* Values Section */}
                     <div className="mb-16">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
                             Our Values
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
-                                <div className="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center mb-4">
+                            <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                                <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-4">
                                     <svg
                                         className="w-6 h-6 text-white"
                                         fill="none"
@@ -72,17 +72,17 @@ export default function AboutPage() {
                                         />
                                     </svg>
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                                     Innovation First
                                 </h3>
-                                <p className="text-gray-600">
+                                <p className="text-gray-600 dark:text-gray-300">
                                     We constantly push the boundaries of what's possible with AI
                                     and machine learning to deliver cutting-edge solutions.
                                 </p>
                             </div>
 
-                            <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
-                                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center mb-4">
+                            <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                                <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-4">
                                     <svg
                                         className="w-6 h-6 text-white"
                                         fill="none"
@@ -97,17 +97,17 @@ export default function AboutPage() {
                                         />
                                     </svg>
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                                     Fairness & Diversity
                                 </h3>
-                                <p className="text-gray-600">
+                                <p className="text-gray-600 dark:text-gray-300">
                                     We're committed to reducing bias in hiring and promoting
                                     diversity through objective, data-driven decisions.
                                 </p>
                             </div>
 
-                            <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
-                                <div className="w-12 h-12 bg-gradient-to-br from-green-600 to-emerald-600 rounded-lg flex items-center justify-center mb-4">
+                            <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                                <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-4">
                                     <svg
                                         className="w-6 h-6 text-white"
                                         fill="none"
@@ -122,17 +122,17 @@ export default function AboutPage() {
                                         />
                                     </svg>
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                                     Privacy & Security
                                 </h3>
-                                <p className="text-gray-600">
+                                <p className="text-gray-600 dark:text-gray-300">
                                     Your data is sacred. We employ enterprise-grade security and
                                     comply with all major privacy regulations.
                                 </p>
                             </div>
 
-                            <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
-                                <div className="w-12 h-12 bg-gradient-to-br from-orange-600 to-red-600 rounded-lg flex items-center justify-center mb-4">
+                            <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                                <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-4">
                                     <svg
                                         className="w-6 h-6 text-white"
                                         fill="none"
@@ -147,10 +147,10 @@ export default function AboutPage() {
                                         />
                                     </svg>
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                                     Customer Success
                                 </h3>
-                                <p className="text-gray-600">
+                                <p className="text-gray-600 dark:text-gray-300">
                                     Your success is our success. We're dedicated to providing
                                     exceptional support and continuous improvement.
                                 </p>
@@ -159,7 +159,7 @@ export default function AboutPage() {
                     </div>
 
                     {/* Team Section */}
-                    <div className="text-center bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-12 text-white">
+                    <div className="text-center bg-indigo-600 dark:bg-indigo-700 rounded-2xl p-12 text-white">
                         <h2 className="text-3xl font-bold mb-4">Join Our Team</h2>
                         <p className="text-xl text-indigo-100 mb-6">
                             We're always looking for talented individuals who share our

@@ -37,8 +37,8 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
     };
 
     return (
-        <div className="bg-white border-t border-gray-200 p-4">
-            <div className="max-w-4xl mx-auto relative flex items-end border border-gray-300 rounded-xl shadow-sm bg-white focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-transparent transition-all">
+        <div className="bg-white dark:bg-gray-900 p-4 sm:p-6">
+            <div className="max-w-4xl mx-auto relative flex items-end border border-gray-300 dark:border-gray-600 rounded-xl shadow-sm bg-white dark:bg-gray-800 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-indigo-500 dark:focus-within:border-indigo-500 transition-all">
                 <textarea
                     ref={textareaRef}
                     value={input}
@@ -47,12 +47,12 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
                     placeholder="Ask a question about HR policies..."
                     disabled={isLoading}
                     rows={1}
-                    className="w-full py-3 pl-4 pr-12 bg-transparent border-none rounded-xl resize-none focus:ring-0 text-gray-900 placeholder-gray-400 disabled:opacity-50 max-h-[120px] overflow-y-auto"
+                    className="w-full py-3 pl-4 pr-12 bg-transparent border-none rounded-xl resize-none focus:ring-0 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 disabled:opacity-50 max-h-[120px] overflow-y-auto"
                 />
                 <button
                     onClick={handleSend}
                     disabled={!input.trim() || isLoading}
-                    className="absolute right-2 bottom-2 p-1.5 rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                    className="absolute right-2 bottom-2 p-1.5 rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors"
                     aria-label="Send message"
                 >
                     <svg
@@ -65,8 +65,8 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
                     </svg>
                 </button>
             </div>
-            <div className="text-center mt-2">
-                <p className="text-xs text-gray-400">
+            <div className="text-center mt-3">
+                <p className="text-xs text-gray-500 dark:text-gray-400">
                     AI can make mistakes. Please verify important information.
                 </p>
             </div>

@@ -1,20 +1,23 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import requests
+import os
 
 from resume_parser import extract_text_from_pdf
 from gemini_client import analyze_resume
 from scorer import normalize_ai_response
 from app.api.chat import router as chat_router
 
-from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+# CORS configuration for development and production
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

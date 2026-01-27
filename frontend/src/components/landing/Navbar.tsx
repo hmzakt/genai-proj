@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import ThemeToggle from "@/components/ThemeToggle";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { user } = useAuth();
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
@@ -13,10 +14,10 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2">
-                        <div className="w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
                             <span className="text-white font-bold text-lg">H</span>
                         </div>
-                        <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                        <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400">
                             HR AI Platform
                         </span>
                     </Link>
@@ -47,24 +48,26 @@ export default function Navbar() {
                         >
                             Contact
                         </Link>
-                        <Link
-                            href="/login"
-                            className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium"
-                        >
-                            Login
-                        </Link>
-                        <ThemeToggle />
-                        <Link
-                            href="/signup"
-                            className="px-5 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-200"
-                        >
-                            Get Started
-                        </Link>
+                        {!user && (
+                            <Link
+                                href="/login"
+                                className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium"
+                            >
+                                Login
+                            </Link>
+                        )}
+                        {!user && (
+                            <Link
+                                href="/signup"
+                                className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-200"
+                            >
+                                Get Started
+                            </Link>
+                        )}
                     </div>
 
                     {/* Mobile Menu Button */}
                     <div className="md:hidden flex items-center space-x-2">
-                        <ThemeToggle />
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -126,20 +129,24 @@ export default function Navbar() {
                         >
                             Contact
                         </Link>
-                        <Link
-                            href="/login"
-                            className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            Login
-                        </Link>
-                        <Link
-                            href="/signup"
-                            className="block mx-4 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-center rounded-lg font-medium"
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            Get Started
-                        </Link>
+                        {!user && (
+                            <Link
+                                href="/login"
+                                className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Login
+                            </Link>
+                        )}
+                        {!user && (
+                            <Link
+                                href="/signup"
+                                className="block mx-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white text-center rounded-lg font-medium"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Get Started
+                            </Link>
+                        )}
                     </div>
                 )}
             </div>

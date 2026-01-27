@@ -35,28 +35,28 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white dark:bg-gray-900">
             <Navbar />
 
             <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-6xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">
-                        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
                             Get in{" "}
-                            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                            <span className="text-indigo-600 dark:text-indigo-400">
                                 Touch
                             </span>
                         </h1>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                             Have questions? Want to book a trial? We'd love to hear from you.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Contact Form */}
-                        <div className="bg-white border-2 border-gray-200 rounded-2xl p-8">
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                        <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-8">
+                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                                 Send us a message
                             </h2>
 
@@ -167,7 +167,7 @@ export default function ContactPage() {
 
                                 <button
                                     type="submit"
-                                    className="w-full px-6 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+                                    className="w-full px-6 py-4 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
                                 >
                                     Send Message
                                 </button>
@@ -176,14 +176,14 @@ export default function ContactPage() {
 
                         {/* Contact Information */}
                         <div className="space-y-8">
-                            <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8">
-                                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8">
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                                     Contact Information
                                 </h2>
 
                                 <div className="space-y-6">
                                     <div className="flex items-start">
-                                        <div className="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                        <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
                                             <svg
                                                 className="w-6 h-6 text-white"
                                                 fill="none"
@@ -199,16 +199,16 @@ export default function ContactPage() {
                                             </svg>
                                         </div>
                                         <div>
-                                            <h3 className="font-semibold text-gray-900 mb-1">
+                                            <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                                                 Email
                                             </h3>
-                                            <p className="text-gray-600">contact@hraiplatform.com</p>
-                                            <p className="text-gray-600">support@hraiplatform.com</p>
+                                            <p className="text-gray-600 dark:text-gray-300">contact@hraiplatform.com</p>
+                                            <p className="text-gray-600 dark:text-gray-300">support@hraiplatform.com</p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start">
-                                        <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                        <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
                                             <svg
                                                 className="w-6 h-6 text-white"
                                                 fill="none"
@@ -224,18 +224,18 @@ export default function ContactPage() {
                                             </svg>
                                         </div>
                                         <div>
-                                            <h3 className="font-semibold text-gray-900 mb-1">
+                                            <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                                                 Phone
                                             </h3>
-                                            <p className="text-gray-600">+1 (555) 123-4567</p>
-                                            <p className="text-gray-600 text-sm">
+                                            <p className="text-gray-600 dark:text-gray-300">+1 (555) 123-4567</p>
+                                            <p className="text-gray-600 dark:text-gray-300 text-sm">
                                                 Mon-Fri, 9am-6pm EST
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start">
-                                        <div className="w-12 h-12 bg-gradient-to-br from-green-600 to-emerald-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                        <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
                                             <svg
                                                 className="w-6 h-6 text-white"
                                                 fill="none"
@@ -257,10 +257,10 @@ export default function ContactPage() {
                                             </svg>
                                         </div>
                                         <div>
-                                            <h3 className="font-semibold text-gray-900 mb-1">
+                                            <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                                                 Office
                                             </h3>
-                                            <p className="text-gray-600">
+                                            <p className="text-gray-600 dark:text-gray-300">
                                                 123 Innovation Drive
                                                 <br />
                                                 San Francisco, CA 94105
@@ -273,7 +273,7 @@ export default function ContactPage() {
                             </div>
 
                             {/* Quick Links */}
-                            <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-8 text-white">
+                            <div className="bg-indigo-600 dark:bg-indigo-700 rounded-2xl p-8 text-white">
                                 <h3 className="text-2xl font-bold mb-4">Ready to Start?</h3>
                                 <p className="text-indigo-100 mb-6">
                                     Book a personalized demo and see how our AI platform can

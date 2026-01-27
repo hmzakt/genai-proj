@@ -17,7 +17,26 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-app.use(cors());
+
+// CORS configuration for Vercel and local development
+const getAllowedOrigins = () => {
+  const origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+  ];
+  
+  if (process.env.FRONTEND_URL) {
+    origins.push(process.env.FRONTEND_URL);
+  }
+  
+  return origins;
+};
+
+app.use(cors({
+  origin: getAllowedOrigins(),
+  credentials: true,
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

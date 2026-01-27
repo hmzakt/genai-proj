@@ -20,16 +20,16 @@ export default function StepIndicator({
                             <div className="flex flex-col items-center flex-1">
                                 <div
                                     className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${isCompleted
-                                            ? "bg-green-500 text-white"
+                                            ? "bg-green-500 dark:bg-green-600 text-white"
                                             : isCurrent
-                                                ? "bg-indigo-600 text-white"
-                                                : "bg-gray-200 text-gray-600"
+                                                ? "bg-indigo-600 dark:bg-indigo-600 text-white"
+                                                : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
                                         }`}
                                 >
                                     {isCompleted ? "✓" : stepNumber}
                                 </div>
                                 <span
-                                    className={`mt-2 text-sm font-medium ${isCurrent ? "text-indigo-600" : "text-gray-500"
+                                    className={`mt-2 text-sm font-medium ${isCurrent ? "text-indigo-600 dark:text-indigo-400" : "text-gray-500 dark:text-gray-400"
                                         }`}
                                 >
                                     {step}
@@ -37,7 +37,7 @@ export default function StepIndicator({
                             </div>
                             {index < steps.length - 1 && (
                                 <div
-                                    className={`h-1 flex-1 mx-4 ${isCompleted ? "bg-green-500" : "bg-gray-200"
+                                    className={`h-1 flex-1 mx-4 ${isCompleted ? "bg-green-500 dark:bg-green-600" : "bg-gray-200 dark:bg-gray-700"
                                         }`}
                                     style={{ marginTop: "-2rem" }}
                                 />

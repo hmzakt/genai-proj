@@ -7,13 +7,13 @@ import Galaxy from "@/components/ui/galaxy";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <Navbar />
 
       {/* Hero Section */}
 
 
-      <section className="relative pb-20 px-4 sm:px-6 lg:px-8 min-h-screen bg-white dark:bg-gray-900 flex items-center">
+      <section className="relative px-4 sm:px-6 lg:px-8 min-h-screen bg-white dark:bg-gray-950 flex items-center">
         {/* Galaxy Background */}
         <div className="absolute inset-0 w-full h-170 overflow-hidden bg-gray-950">
           <Galaxy />
@@ -22,9 +22,9 @@ export default function LandingPage() {
         {/* Content Overlay */}
         <div className="relative z-10 max-w-7xl mx-auto w-full">
           <div className="text-center">
-            <h1 className="text-5xl pt-20 md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6">
+            <h1 className="text-5xl pt-20 md:text-6xl lg:text-7xl font-bold text-gray-950 dark:text-white mb-6">
               Transform Your Hiring with{" "}
-              <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-indigo-600 dark:text-indigo-400">
                 AI-Powered
               </span>{" "}
               Intelligence
@@ -37,7 +37,7 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 href="/contact"
-                className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-200 w-full sm:w-auto text-center"
+                className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-200 w-full sm:w-auto text-center"
               >
                 Book a Trial
               </Link>
@@ -53,7 +53,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
@@ -67,8 +67,8 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="group p-8 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <div className="w-14 h-14 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div className="group p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <svg
                   className="w-7 h-7 text-white"
                   fill="none"
@@ -94,8 +94,8 @@ export default function LandingPage() {
             </div>
 
             {/* Feature 2 */}
-            <div className="group p-8 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div className="group p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <svg
                   className="w-7 h-7 text-white"
                   fill="none"
@@ -120,8 +120,8 @@ export default function LandingPage() {
             </div>
 
             {/* Feature 3 */}
-            <div className="group p-8 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <div className="w-14 h-14 bg-gradient-to-br from-green-600 to-emerald-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div className="group p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <svg
                   className="w-7 h-7 text-white"
                   fill="none"
@@ -146,8 +146,8 @@ export default function LandingPage() {
             </div>
 
             {/* Feature 4 */}
-            <div className="group p-8 bg-gradient-to-br from-orange-50 to-red-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-red-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div className="group p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <svg
                   className="w-7 h-7 text-white"
                   fill="none"
@@ -172,8 +172,8 @@ export default function LandingPage() {
             </div>
 
             {/* Feature 5 */}
-            <div className="group p-8 bg-gradient-to-br from-pink-50 to-rose-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <div className="w-14 h-14 bg-gradient-to-br from-pink-600 to-rose-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div className="group p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <svg
                   className="w-7 h-7 text-white"
                   fill="none"
@@ -198,8 +198,8 @@ export default function LandingPage() {
             </div>
 
             {/* Feature 6 */}
-            <div className="group p-8 bg-gradient-to-br from-violet-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <div className="w-14 h-14 bg-gradient-to-br from-violet-600 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div className="group p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <svg
                   className="w-7 h-7 text-white"
                   fill="none"
@@ -227,7 +227,7 @@ export default function LandingPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-600 to-purple-600">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-blue-900 dark:bg-blue-900">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
             <div>
@@ -235,11 +235,11 @@ export default function LandingPage() {
               <div className="text-xl text-indigo-100">Time Saved</div>
             </div>
             <div>
-              <div className="text-5xl font-bold mb-2">10,000+</div>
+              <div className="text-5xl font-bold mb-2">xx,xxx+</div>
               <div className="text-xl text-indigo-100">Resumes Processed</div>
             </div>
             <div>
-              <div className="text-5xl font-bold mb-2">500+</div>
+              <div className="text-5xl font-bold mb-2">xxx+</div>
               <div className="text-xl text-indigo-100">Happy Companies</div>
             </div>
           </div>
@@ -259,7 +259,7 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               href="/contact"
-              className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-200 w-full sm:w-auto text-center"
+              className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-200 w-full sm:w-auto text-center"
             >
               Book a Trial
             </Link>

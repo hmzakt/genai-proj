@@ -93,10 +93,10 @@ export default function EmployeeOnboardingWizard() {
         <div className="max-w-4xl mx-auto">
             <StepIndicator currentStep={currentStep} steps={steps} />
 
-            <div className="bg-white rounded-lg shadow p-8">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 p-8">
                 {currentStep === 1 && (
                     <>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                             Employee Information
                         </h2>
                         <EmployeeInfoForm
@@ -104,7 +104,7 @@ export default function EmployeeOnboardingWizard() {
                             initialData={employeeData || undefined}
                         />
                         {createEmployeeMutation.isError && (
-                            <div className="mt-4 p-3 bg-red-50 text-red-700 rounded-md text-sm">
+                            <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded-md text-sm border border-red-200 dark:border-red-800">
                                 {(createEmployeeMutation.error as any)?.response?.data?.error ||
                                     "Failed to create employee"}
                             </div>
@@ -114,7 +114,7 @@ export default function EmployeeOnboardingWizard() {
 
                 {currentStep === 2 && (
                     <>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                             Payroll Configuration
                         </h2>
                         <PayrollConfigForm
@@ -124,7 +124,7 @@ export default function EmployeeOnboardingWizard() {
                             initialData={payrollData || undefined}
                         />
                         {createPayrollProfileMutation.isError && (
-                            <div className="mt-4 p-3 bg-red-50 text-red-700 rounded-md text-sm">
+                            <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded-md text-sm border border-red-200 dark:border-red-800">
                                 {(createPayrollProfileMutation.error as any)?.response?.data
                                     ?.error || "Failed to create payroll profile"}
                             </div>
@@ -134,7 +134,7 @@ export default function EmployeeOnboardingWizard() {
 
                 {currentStep === 3 && (
                     <>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                             Bank Account & Payment Setup
                         </h2>
                         <BankAccountForm
@@ -144,7 +144,7 @@ export default function EmployeeOnboardingWizard() {
                             isSubmitting={false}
                         />
                         {createBankAccountMutation.isError && (
-                            <div className="mt-4 p-3 bg-red-50 text-red-700 rounded-md text-sm">
+                            <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded-md text-sm border border-red-200 dark:border-red-800">
                                 {(createBankAccountMutation.error as any)?.response?.data
                                     ?.error || "Failed to create bank account"}
                             </div>

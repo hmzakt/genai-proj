@@ -6,13 +6,13 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300">
+        <footer className="bg-gray-900 dark:bg-gray-950 text-gray-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                     {/* Brand Section */}
                     <div className="col-span-1 md:col-span-2">
                         <div className="flex items-center space-x-2 mb-4">
-                            <div className="w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+                            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
                                 <span className="text-white font-bold text-lg">H</span>
                             </div>
                             <span className="text-xl font-bold text-white">

@@ -74,7 +74,7 @@ export default function PayrollConfigForm({
         <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Employment Type <span className="text-red-500">*</span>
                     </label>
                     <select
@@ -82,7 +82,7 @@ export default function PayrollConfigForm({
                         onChange={(e) =>
                             handleChange("employmentType", e.target.value as EmploymentType)
                         }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     >
                         <option value="FULL_TIME">Full Time</option>
                         <option value="CONTRACT">Contract</option>
@@ -91,7 +91,7 @@ export default function PayrollConfigForm({
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Pay Frequency <span className="text-red-500">*</span>
                     </label>
                     <select
@@ -99,7 +99,7 @@ export default function PayrollConfigForm({
                         onChange={(e) =>
                             handleChange("payFrequency", e.target.value as PayFrequency)
                         }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     >
                         <option value="MONTHLY">Monthly</option>
                         <option value="DAILY">Daily</option>
@@ -107,7 +107,7 @@ export default function PayrollConfigForm({
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Base Salary (INR) <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -116,26 +116,26 @@ export default function PayrollConfigForm({
                         onChange={(e) =>
                             handleChange("baseSalary", parseFloat(e.target.value) || 0)
                         }
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900 ${errors.baseSalary ? "border-red-500" : "border-gray-300"
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 ${errors.baseSalary ? "border-red-500 dark:border-red-500" : ""
                             }`}
                         placeholder="50000"
                         min="0"
                         step="1000"
                     />
                     {errors.baseSalary && (
-                        <p className="mt-1 text-sm text-red-600">{errors.baseSalary}</p>
+                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.baseSalary}</p>
                     )}
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Effective From <span className="text-red-500">*</span>
                     </label>
                     <input
                         type="date"
                         value={formData.effectiveFrom}
                         onChange={(e) => handleChange("effectiveFrom", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900 ${errors.effectiveFrom ? "border-red-500" : "border-gray-300"
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 ${errors.effectiveFrom ? "border-red-500 dark:border-red-500" : ""
                             }`}
                     />
                     {errors.effectiveFrom && (
@@ -144,13 +144,13 @@ export default function PayrollConfigForm({
                 </div>
 
                 <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Incentive Plan (Optional)
                     </label>
                     <select
                         value={formData.incentivePlanId}
                         onChange={(e) => handleChange("incentivePlanId", e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                         disabled={isLoading}
                     >
                         <option value="">No Incentive Plan</option>
@@ -167,13 +167,13 @@ export default function PayrollConfigForm({
                 <button
                     type="button"
                     onClick={onBack}
-                    className="px-6 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                    className="px-6 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                     Back
                 </button>
                 <button
                     type="submit"
-                    className="px-6 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+                    className="px-6 py-2 text-sm font-medium text-white bg-indigo-600 dark:bg-indigo-600 rounded-md hover:bg-indigo-700 dark:hover:bg-indigo-700"
                 >
                     Next: Bank Account
                 </button>

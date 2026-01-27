@@ -53,20 +53,20 @@ export default function PricingPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white dark:bg-gray-900">
             <Navbar />
 
             <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">
-                        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
                             Simple, Transparent{" "}
-                            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                            <span className="text-indigo-600 dark:text-indigo-400">
                                 Pricing
                             </span>
                         </h1>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                             Choose the perfect plan for your hiring needs. All plans include a
                             14-day free trial.
                         </p>
@@ -78,8 +78,8 @@ export default function PricingPage() {
                             <div
                                 key={index}
                                 className={`relative rounded-2xl p-8 ${plan.highlighted
-                                        ? "bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-2xl scale-105"
-                                        : "bg-white border-2 border-gray-200"
+                                        ? "bg-indigo-600 dark:bg-indigo-700 text-white shadow-2xl scale-105"
+                                        : "bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700"
                                     }`}
                             >
                                 {plan.highlighted && (
@@ -143,7 +143,7 @@ export default function PricingPage() {
                                     href="/contact"
                                     className={`block w-full py-3 px-6 rounded-xl font-semibold text-center transition-all duration-200 ${plan.highlighted
                                             ? "bg-white text-indigo-600 hover:bg-gray-100"
-                                            : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:shadow-lg"
+                                            : "bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white hover:shadow-lg"
                                         }`}
                                 >
                                     {plan.price === "Custom" ? "Contact Sales" : "Get Started"}
@@ -154,33 +154,33 @@ export default function PricingPage() {
 
                     {/* FAQ Section */}
                     <div className="max-w-3xl mx-auto">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
                             Frequently Asked Questions
                         </h2>
                         <div className="space-y-6">
-                            <div className="bg-gray-50 rounded-xl p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6">
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                                     When will pricing be available?
                                 </h3>
-                                <p className="text-gray-600">
+                                <p className="text-gray-600 dark:text-gray-300">
                                     We're currently finalizing our pricing structure. Contact us
                                     to discuss your needs and get early access pricing.
                                 </p>
                             </div>
-                            <div className="bg-gray-50 rounded-xl p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6">
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                                     Can I change plans later?
                                 </h3>
-                                <p className="text-gray-600">
+                                <p className="text-gray-600 dark:text-gray-300">
                                     Yes! You can upgrade or downgrade your plan at any time. Changes
                                     will be reflected in your next billing cycle.
                                 </p>
                             </div>
-                            <div className="bg-gray-50 rounded-xl p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6">
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                                     What payment methods do you accept?
                                 </h3>
-                                <p className="text-gray-600">
+                                <p className="text-gray-600 dark:text-gray-300">
                                     We accept all major credit cards, bank transfers, and can set up
                                     custom payment terms for enterprise customers.
                                 </p>

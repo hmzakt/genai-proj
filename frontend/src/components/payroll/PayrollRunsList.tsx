@@ -84,7 +84,7 @@ export default function PayrollRunsList() {
                 return (
                     <button
                         onClick={() => handleAction("review", payroll._id)}
-                        className="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                        className="px-3 py-1 text-sm font-medium text-white bg-blue-600 dark:bg-blue-600 rounded-md hover:bg-blue-700 dark:hover:bg-blue-700"
                     >
                         Review
                     </button>
@@ -93,7 +93,7 @@ export default function PayrollRunsList() {
                 return (
                     <button
                         onClick={() => handleAction("approve", payroll._id)}
-                        className="px-3 py-1 text-sm font-medium text-white bg-purple-600 rounded-md hover:bg-purple-700"
+                        className="px-3 py-1 text-sm font-medium text-white bg-purple-600 dark:bg-purple-600 rounded-md hover:bg-purple-700 dark:hover:bg-purple-700"
                     >
                         Approve
                     </button>
@@ -102,7 +102,7 @@ export default function PayrollRunsList() {
                 return (
                     <button
                         onClick={() => handleAction("pay", payroll._id)}
-                        className="px-3 py-1 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700"
+                        className="px-3 py-1 text-sm font-medium text-white bg-green-600 dark:bg-green-600 rounded-md hover:bg-green-700 dark:hover:bg-green-700"
                     >
                         Pay
                     </button>
@@ -111,7 +111,7 @@ export default function PayrollRunsList() {
                 return (
                     <button
                         onClick={() => router.push(`/payroll/${payroll._id}/items`)}
-                        className="px-3 py-1 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-md hover:bg-indigo-100"
+                        className="px-3 py-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-900/50"
                     >
                         View Payslips
                     </button>
@@ -154,7 +154,7 @@ export default function PayrollRunsList() {
     if (isLoading) {
         return (
             <div className="flex items-center justify-center h-64">
-                <div className="text-gray-500">Loading payroll runs...</div>
+                <div className="text-gray-500 dark:text-gray-400">Loading payroll runs...</div>
             </div>
         );
     }
@@ -162,7 +162,7 @@ export default function PayrollRunsList() {
     if (error) {
         return (
             <div className="flex items-center justify-center h-64">
-                <div className="text-red-600">
+                <div className="text-red-600 dark:text-red-400">
                     Error loading payroll runs. Please try again.
                 </div>
             </div>
@@ -174,35 +174,35 @@ export default function PayrollRunsList() {
     return (
         <>
             <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Period
                             </th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Status
                             </th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Created
                             </th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Actions
                             </th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                         {payrollRuns && payrollRuns.length > 0 ? (
                             payrollRuns.map((payroll) => (
-                                <tr key={payroll._id} className="hover:bg-gray-50">
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                <tr key={payroll._id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                                         {format(new Date(payroll.periodStart), "MMM dd, yyyy")} -{" "}
                                         {format(new Date(payroll.periodEnd), "MMM dd, yyyy")}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <StatusBadge status={payroll.status} />
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
                                         {format(new Date(payroll.createdAt), "MMM dd, yyyy")}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -214,7 +214,7 @@ export default function PayrollRunsList() {
                             <tr>
                                 <td
                                     colSpan={4}
-                                    className="px-6 py-8 text-center text-sm text-gray-500"
+                                    className="px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400"
                                 >
                                     No payroll runs found. Create your first payroll run to get
                                     started.
