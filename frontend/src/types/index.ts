@@ -15,6 +15,7 @@ export interface Batch {
     createdAt: string;
 }
 
+// Candidate type with all properties
 export interface Candidate {
     _id: string;
     batchId: string;
@@ -25,4 +26,7 @@ export interface Candidate {
     summary: string;
     rank?: number;
     resumeUrl?: string;
+    // Additional optional fields
+    phone?: string;
+    location?: string;
 }
