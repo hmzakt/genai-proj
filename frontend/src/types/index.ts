@@ -24,4 +24,5 @@ export interface Candidate {
     status: string;
     summary: string;
     rank?: number;
+    resumeUrl?: string;
 }
