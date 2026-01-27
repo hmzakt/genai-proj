@@ -1,3 +1,14 @@
 deployment_plan.md
 DEPLOYMENT_CHANGES.md
 DEPLOYMENT_GUIDE.md
+
+**/serviceAccountKey.json
+**/google_client.json
+**/.env
+**/.env.local
+**/node_modules/
+**/__pycache__/
+**/.venv/
+**/venv/
+**/*.pem
+**/*.key
