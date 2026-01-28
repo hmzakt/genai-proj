@@ -1,9 +1,13 @@
 import axios from "axios";
 import { ChatRequest, ChatResponse } from "@/types/chat";
 
-// Create a separate instance for the Python AI Service (Port 8000)
+// Create a separate instance for the Python AI Service
+const getAiServiceUrl = () => {
+    return process.env.NEXT_PUBLIC_AI_SERVICE_URL || "http://localhost:8000";
+};
+
 const aiApi = axios.create({
-    baseURL: "http://localhost:8000",
+    baseURL: getAiServiceUrl(),
     headers: {
         "Content-Type": "application/json",
     },
