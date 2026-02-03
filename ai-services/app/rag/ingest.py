@@ -1,8 +1,12 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from app.vectorstore.chroma import get_vectorstore
+
+# Load environment variables
+load_dotenv()
 
 # Get absolute path to data directory
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -44,7 +48,10 @@ def ingest_documents():
     
     vectorstore = get_vectorstore()
     vectorstore.add_documents(chunks)
-    vectorstore.persist()
+    
+    # Only persist if using local Chroma
+    if not os.getenv("CHROMADB_API_KEY"):
+        vectorstore.persist()
     
     print(f"Data ingestion successful! Ingested {len(chunks)} chunks from {len(documents)} documents")
 

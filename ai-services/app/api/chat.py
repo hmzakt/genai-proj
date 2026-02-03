@@ -1,9 +1,11 @@
 from fastapi import APIRouter
 from app.schemas.chat import ChatRequest, ChatResponse
 from app.rag.chain import get_hr_chain
-from app.vectorstore.chroma import get_vectorstore
 
 router = APIRouter()
+
+# Initialize chain once at startup
+hr_chain = get_hr_chain()
 
 
 @router.post("/chat", response_model=ChatResponse)
@@ -14,22 +16,13 @@ async def chat(req: ChatRequest):
     - Gemini for generation
     - ChromaDB for retrieval
     """
-    chain = get_hr_chain()
-
-    # 2️⃣ Retrieve documents explicitly (for sources)
-    retriever = get_vectorstore().as_retriever(search_kwargs={"k": 4})
-    docs = retriever.invoke(req.question)
-
-    answer = await chain.ainvoke(req.question)
-
-    sources = list(
-        {
-            doc.metadata.get("source", "unknown")
-            for doc in docs
-        }
-    )
-
+    # Use pre-initialized chain
+    answer = await hr_chain.ainvoke(req.question)
+    
+    # Extract sources from the retriever step if needed
+    # For now, return empty sources since we're using the chain directly
+    
     return ChatResponse(
         answer=answer,
-        sources=sources,
+        sources=[],
     )

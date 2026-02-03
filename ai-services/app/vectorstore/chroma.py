@@ -1,14 +1,36 @@
+import os
 from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+import chromadb
 
 PERSIST_DIR = "data/chroma"
 
-def get_vectorstore() :
-    embeddings = HuggingFaceEmbeddings(
-        model_name = "sentence-transformers/all-MiniLM-L6-V2"
+def get_vectorstore():
+    gemini_api_key = os.getenv("GEMINI_API_KEY")
+    
+    embeddings = GoogleGenerativeAIEmbeddings(
+        model="text-embedding-004",
+        google_api_key=gemini_api_key # type: ignore
     )
     
-    return Chroma(
-        persist_directory = PERSIST_DIR,
-        embedding_function=embeddings
-    )
+    chroma_api_key = os.getenv("CHROMADB_API_KEY")
+    chroma_tenant = os.getenv("CHROMADB_TENANT_KEY")
+    chroma_db_name = os.getenv("CHROMADB_DB_NAME", "hr_policies")
+    
+    if chroma_api_key and chroma_tenant:
+        client = chromadb.CloudClient(
+            api_key = chroma_api_key,
+            tenant=chroma_tenant,
+            database=chroma_db_name
+        )
+        
+        return Chroma(
+            client=client,
+            collection_name="hr_knowledge_base",
+            embedding_function=embeddings
+        )
+    else:
+        return Chroma(
+            persist_directory=PERSIST_DIR,
+            embedding_function=embeddings
+        )

@@ -2,6 +2,10 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import requests
 import os
+from dotenv import load_dotenv
+
+# Load environment variables first
+load_dotenv()
 
 from resume_parser import extract_text_from_pdf
 from gemini_client import analyze_resume
