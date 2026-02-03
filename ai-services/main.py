@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import requests
 import os
@@ -33,8 +33,33 @@ class ResumeRequest(BaseModel):
 
 @app.post("/process-resume")
 def process_resume(data:ResumeRequest):
-    pdf_response = requests.get(data.resume_url)
-    resume_text = extract_text_from_pdf(pdf_response.content)
+    max_pdf_bytes = int(os.getenv("MAX_PDF_BYTES", "8000000"))
+    try:
+        pdf_response = requests.get(
+            data.resume_url,
+            timeout=20,
+            headers={"User-Agent": "Mozilla/5.0"},
+        )
+    except requests.RequestException as exc:
+        raise HTTPException(status_code=502, detail=f"Failed to fetch resume: {exc}")
+
+    if pdf_response.status_code != 200:
+        raise HTTPException(status_code=502, detail="Failed to fetch resume: non-200 response")
+
+    content = pdf_response.content
+    if len(content) > max_pdf_bytes:
+        raise HTTPException(status_code=413, detail="Resume PDF is too large")
+
+    if not content.startswith(b"%PDF"):
+        raise HTTPException(status_code=400, detail="Resume URL did not return a PDF")
+
+    try:
+        resume_text = extract_text_from_pdf(content)
+    except Exception as exc:
+        raise HTTPException(status_code=422, detail=f"Failed to parse PDF: {exc}")
+
+    if not resume_text.strip():
+        raise HTTPException(status_code=422, detail="Parsed PDF contained no text")
     raw_res = analyze_resume(resume_text, data.job_description)
     result = normalize_ai_response(str(raw_res))
     
