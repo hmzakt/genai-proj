@@ -17,12 +17,27 @@ async function saveFile(file) {
   const fileName = `${Date.now()}-${file.originalname}`;
   const filePath = path.join(UPLOAD_DIR, fileName);
 
-  fs.writeFileSync(filePath, file.buffer);
+  try {
+    fs.writeFileSync(filePath, file.buffer);
+    console.log(`File saved successfully: ${fileName}`);
+  } catch (error) {
+    console.error(`Error saving file ${fileName}:`, error);
+    throw new Error(`Failed to save file: ${error.message}`);
+  }
 
-  // Return relative path. Frontend should prepend API_URL or we return full URL.
-  // Returning full URL is safer for flexibility.
-  const baseUrl = process.env.BASE_URL || "http://localhost:5000";
-  return `${baseUrl}/uploads/${fileName}`;
+  // Validate BASE_URL is set
+  const baseUrl = process.env.BASE_URL;
+  if (!baseUrl) {
+    console.error(" CRITICAL: BASE_URL environment variable is not set!");
+    console.error(" This will cause resume processing to fail in production.");
+    console.error(" Please set BASE_URL to your backend URL (e.g., https://your-backend.com)");
+    throw new Error("BASE_URL environment variable is required but not set");
+  }
+
+  const fullUrl = `${baseUrl}/uploads/${fileName}`;
+  console.log(`Generated resume URL: ${fullUrl}`);
+
+  return fullUrl;
 }
 
 
