@@ -1,16 +1,15 @@
 import os
-from langchain_community.vectorstores import Chroma
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_chroma import Chroma
 import chromadb
+from langchain_huggingface import HuggingFaceEmbeddings
 
 PERSIST_DIR = "data/chroma"
 
 def get_vectorstore():
     gemini_api_key = os.getenv("GEMINI_API_KEY")
     
-    embeddings = GoogleGenerativeAIEmbeddings(
-        model="text-embedding-004",
-        google_api_key=gemini_api_key # type: ignore
+    embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
     
     chroma_api_key = os.getenv("CHROMADB_API_KEY")
