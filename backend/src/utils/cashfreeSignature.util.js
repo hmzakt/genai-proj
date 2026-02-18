@@ -16,25 +16,32 @@ import path from "path";
  * @returns {string} Base64-encoded RSA-OAEP encrypted signature
  */
 export function generateCashfreeSignature(clientId) {
-    const publicKeyPath = process.env.CASHFREE_PUBLIC_KEY_PATH;
+    let publicKeyPem = process.env.CASHFREE_PUBLIC_KEY;
 
-    if (!publicKeyPath) {
-        throw new Error(
-            "CASHFREE_PUBLIC_KEY_PATH is not set in .env. " +
-            "Download the public key from Cashfree Dashboard > Payouts > Developers > Two-Factor Authentication."
-        );
+    if (!publicKeyPem) {
+        const publicKeyPath = process.env.CASHFREE_PUBLIC_KEY_PATH;
+
+        if (!publicKeyPath) {
+            throw new Error(
+                "Neither CASHFREE_PUBLIC_KEY nor CASHFREE_PUBLIC_KEY_PATH is set in .env. " +
+                "Please provide the PEM content or the file path."
+            );
+        }
+
+        // Try to resolve path relative to project root or use absolute path
+        const resolvedPath = path.isAbsolute(publicKeyPath)
+            ? publicKeyPath
+            : path.resolve(process.cwd(), publicKeyPath);
+
+        if (!fs.existsSync(resolvedPath)) {
+            throw new Error(
+                `Cashfree public key file not found at: ${resolvedPath}. ` +
+                "Ensure CASHFREE_PUBLIC_KEY_PATH is correct or use CASHFREE_PUBLIC_KEY for the PEM content."
+            );
+        }
+
+        publicKeyPem = fs.readFileSync(resolvedPath, "utf8");
     }
-
-    const resolvedPath = path.resolve(publicKeyPath);
-
-    if (!fs.existsSync(resolvedPath)) {
-        throw new Error(
-            `Cashfree public key file not found at: ${resolvedPath}. ` +
-            "Ensure CASHFREE_PUBLIC_KEY_PATH points to the downloaded .pem file."
-        );
-    }
-
-    const publicKeyPem = fs.readFileSync(resolvedPath, "utf8");
 
     // Build the data to encrypt: "<clientId>.<unixTimestampSeconds>"
     const unixTimestamp = Math.floor(Date.now() / 1000);
