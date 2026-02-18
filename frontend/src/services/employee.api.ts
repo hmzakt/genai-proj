@@ -69,4 +69,9 @@ export const employeeApi = {
         const response = await api.get("/api/employees/incentive-plans/list");
         return response.data;
     },
+
+    // Delete employee
+    deleteEmployee: async (employeeId: string): Promise<void> => {
+        await api.delete(`/api/employees/${employeeId}`);
+    },
 };

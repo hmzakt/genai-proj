@@ -22,18 +22,21 @@ export default function PayrollPage() {
                                     Payroll Management
                                 </h1>
                                 <p className="text-gray-600 dark:text-gray-300 mt-1 text-xs sm:text-sm lg:text-base">
-                                Manage payroll runs and employee payments
-                            </p>
-                        </div>
+                                    Manage payroll runs and employee payments
+                                </p>
+                            </div>
                             <button
                                 onClick={() => setIsCreateModalOpen(true)}
-                                className="px-4 py-2 text-xs sm:text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 rounded-md w-full sm:w-auto"
+                                className="px-6 py-3 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 rounded-xl shadow-lg hover:shadow-indigo-500/30 transition-all duration-200 w-full sm:w-auto flex items-center justify-center"
                             >
+                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
                                 Create Payroll Run
                             </button>
                         </div>
 
-                        <div className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700">
+                        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
                             <PayrollRunsList />
                         </div>
                     </div>

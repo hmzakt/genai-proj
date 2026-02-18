@@ -31,7 +31,7 @@ export default function AboutPage() {
                                 Our Story
                             </h2>
                             <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-                                Founded in 2024, HR AI Platform was born from a simple
+                                Founded in 2026, HR AI Platform was born from a simple
                                 observation: hiring teams spend countless hours manually
                                 screening resumes, often missing great candidates due to time
                                 constraints and unconscious bias.
@@ -41,11 +41,6 @@ export default function AboutPage() {
                                 cutting-edge artificial intelligence with deep HR expertise, we
                                 created a platform that not only saves time but also improves
                                 the quality of hiring decisions.
-                            </p>
-                            <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                                Today, we're proud to serve over 500 companies worldwide,
-                                helping them find the right talent faster and more efficiently
-                                than ever before.
                             </p>
                         </div>
                     </div>
@@ -156,21 +151,6 @@ export default function AboutPage() {
                                 </p>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Team Section */}
-                    <div className="text-center bg-indigo-600 dark:bg-indigo-700 rounded-2xl p-6 sm:p-8 lg:p-12 text-white">
-                        <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Join Our Team</h2>
-                        <p className="text-base sm:text-lg lg:text-xl text-indigo-100 mb-4 sm:mb-6 px-2">
-                            We're always looking for talented individuals who share our
-                            passion for innovation and excellence.
-                        </p>
-                        <a
-                            href="#"
-                            className="inline-block px-6 sm:px-8 py-2 sm:py-3 bg-white text-indigo-600 rounded-xl font-semibold hover:bg-gray-100 transition-colors text-sm sm:text-base"
-                        >
-                            View Open Positions
-                        </a>
                     </div>
                 </div>
             </div>

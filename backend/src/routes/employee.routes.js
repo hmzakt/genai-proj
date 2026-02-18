@@ -8,6 +8,7 @@ import {
     createBankAccountController,
     startCashfreeOnboardingController,
     listIncentivePlans,
+    deleteEmployee,
 } from "../controllers/employee.controller.js";
 import { authenticate } from "../middlewares/auth.middleware.js";
 
@@ -21,6 +22,7 @@ router.get("/", listEmployees);
 router.get("/:id", getEmployee);
 router.post("/", createEmployeeController);
 router.put("/:id", updateEmployee);
+router.delete("/:id", deleteEmployee);
 
 // Payroll profile routes
 router.post("/payroll-profiles", createPayrollProfileController);

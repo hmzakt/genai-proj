@@ -79,10 +79,10 @@ export default function PayrollRunsList() {
     };
 
     const getActionButton = (payroll: PayrollRun, isMobile: boolean = false) => {
-        const baseClasses = isMobile 
-            ? "w-full px-3 py-2 text-xs font-medium rounded-md"
-            : "px-3 py-1 text-sm font-medium rounded-md";
-        
+        const baseClasses = isMobile
+            ? "w-full px-4 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200"
+            : "px-4 py-1.5 text-sm font-semibold rounded-lg transition-all duration-200 shadow-sm hover:shadow-md active:scale-95";
+
         switch (payroll.status) {
             case "DRAFT":
                 return (
@@ -181,7 +181,7 @@ export default function PayrollRunsList() {
             <div className="lg:hidden space-y-3 p-3 sm:p-4">
                 {payrollRuns && payrollRuns.length > 0 ? (
                     payrollRuns.map((payroll) => (
-                        <div key={payroll._id} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm">
+                        <div key={payroll._id} className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
                             <div className="space-y-3">
                                 <div>
                                     <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Period</div>

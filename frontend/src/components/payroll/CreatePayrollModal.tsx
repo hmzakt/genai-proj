@@ -53,10 +53,10 @@ export default function CreatePayrollModal({
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
-                <div className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4">
+            <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl max-w-md w-full mx-auto overflow-hidden">
+                <div className="p-6 sm:p-8">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-6">
                         Create Payroll Run
                     </h3>
 
@@ -65,7 +65,7 @@ export default function CreatePayrollModal({
                             <div>
                                 <label
                                     htmlFor="periodStart"
-                                    className="block text-sm font-medium text-gray-700 mb-1"
+                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                                 >
                                     Period Start
                                 </label>
@@ -74,7 +74,7 @@ export default function CreatePayrollModal({
                                     id="periodStart"
                                     value={periodStart}
                                     onChange={(e) => setPeriodStart(e.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
                                     disabled={createMutation.isPending}
                                 />
                             </div>
@@ -82,7 +82,7 @@ export default function CreatePayrollModal({
                             <div>
                                 <label
                                     htmlFor="periodEnd"
-                                    className="block text-sm font-medium text-gray-700 mb-1"
+                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                                 >
                                     Period End
                                 </label>
@@ -91,33 +91,43 @@ export default function CreatePayrollModal({
                                     id="periodEnd"
                                     value={periodEnd}
                                     onChange={(e) => setPeriodEnd(e.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
                                     disabled={createMutation.isPending}
                                 />
                             </div>
 
                             {error && (
-                                <div className="text-sm text-red-600 bg-red-50 p-3 rounded-md">
+                                <div className="text-sm border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 p-3 rounded-lg">
                                     {error}
                                 </div>
                             )}
                         </div>
 
-                        <div className="flex justify-end gap-3 mt-6">
+                        <div className="flex flex-col sm:flex-row justify-end gap-3 mt-8">
                             <button
                                 type="button"
                                 onClick={onClose}
                                 disabled={createMutation.isPending}
-                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="px-6 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all disabled:opacity-50"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
                                 disabled={createMutation.isPending}
-                                className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="px-6 py-3 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 rounded-xl shadow-lg hover:shadow-indigo-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[100px]"
                             >
-                                {createMutation.isPending ? "Creating..." : "Create"}
+                                {createMutation.isPending ? (
+                                    <>
+                                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Creating...
+                                    </>
+                                ) : (
+                                    "Create Run"
+                                )}
                             </button>
                         </div>
                     </form>

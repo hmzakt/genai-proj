@@ -135,3 +135,29 @@ export async function listIncentivePlans(req, res) {
         res.status(500).json({ error: err.message });
     }
 }
+// Delete employee and associated data
+export async function deleteEmployee(req, res) {
+    try {
+        const employee = await Employee.findById(req.params.id);
+
+        if (!employee) {
+            return res.status(404).json({ error: "Employee not found" });
+        }
+
+        // Ensure ownership
+        if (!employee.companyId.equals(req.user.companyId)) {
+            return res.status(403).json({ error: "Access denied" });
+        }
+
+        // Delete associated payroll profile and bank account
+        await Promise.all([
+            PayrollProfile.deleteMany({ employeeId: req.params.id }),
+            BankAccount.deleteMany({ employeeId: req.params.id }),
+            Employee.findByIdAndDelete(req.params.id)
+        ]);
+
+        res.json({ message: "Employee deleted successfully" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
