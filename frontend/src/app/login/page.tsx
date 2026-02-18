@@ -39,21 +39,21 @@ export default function LoginPage() {
         <div className="min-h-screen bg-white dark:bg-gray-900">
             <Navbar />
 
-            <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
+            <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-8">
                 <div className="max-w-md w-full">
                     {/* Card */}
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 sm:p-10 border border-gray-200 dark:border-gray-700">
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 sm:p-8 lg:p-10 border border-gray-200 dark:border-gray-700">
                         {/* Header */}
-                        <div className="text-center mb-8">
-                            <div className="inline-flex items-center justify-center w-12 h-12 bg-indigo-600 rounded-lg mb-4">
-                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="text-center mb-6 sm:mb-8">
+                            <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-indigo-600 rounded-lg mb-3 sm:mb-4">
+                                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                             </div>
-                            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
+                            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-2">
                                 Welcome Back
                             </h2>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                                 Sign in to continue to your account
                             </p>
                         </div>

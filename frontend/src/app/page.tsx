@@ -21,15 +21,15 @@ export default function LandingPage() {
 
         {/* Content Overlay */}
         <div className="relative z-10 max-w-7xl mx-auto w-full">
-          <div className="text-center">
-            <h1 className="text-5xl pt-20 md:text-6xl lg:text-7xl font-bold text-gray-950 dark:text-white mb-6">
+          <div className="text-center px-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl pt-16 sm:pt-20 font-bold text-gray-950 dark:text-white mb-4 sm:mb-6">
               Transform Your Hiring with{" "}
               <span className="text-indigo-600 dark:text-indigo-400">
                 AI-Powered
               </span>{" "}
               Intelligence
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 mb-8 sm:mb-10 max-w-3xl mx-auto">
               Screen resumes faster, eliminate bias, and find the perfect
               candidates with our advanced AI platform. Save 90% of your
               recruitment time.
@@ -53,19 +53,19 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
+      <section id="features" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
               Powerful Features for Modern HR Teams
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-2">
               Everything you need to streamline your recruitment process and
               make data-driven hiring decisions.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Feature 1 */}
             <div className="group p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div className="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -227,32 +227,32 @@ export default function LandingPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-blue-900 dark:bg-blue-900">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-blue-900 dark:bg-blue-900">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center text-white">
             <div>
-              <div className="text-5xl font-bold mb-2">90%</div>
-              <div className="text-xl text-indigo-100">Time Saved</div>
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2">90%</div>
+              <div className="text-base sm:text-lg lg:text-xl text-indigo-100">Time Saved</div>
             </div>
             <div>
-              <div className="text-5xl font-bold mb-2">xx,xxx+</div>
-              <div className="text-xl text-indigo-100">Resumes Processed</div>
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2">xx,xxx+</div>
+              <div className="text-base sm:text-lg lg:text-xl text-indigo-100">Resumes Processed</div>
             </div>
             <div>
-              <div className="text-5xl font-bold mb-2">xxx+</div>
-              <div className="text-xl text-indigo-100">Happy Companies</div>
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2">xxx+</div>
+              <div className="text-base sm:text-lg lg:text-xl text-indigo-100">Happy Companies</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
             Ready to Transform Your Hiring?
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-10">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-8 sm:mb-10 px-2">
             Join hundreds of companies already using our AI platform to hire
             smarter and faster.
           </p>

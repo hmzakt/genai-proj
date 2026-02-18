@@ -78,13 +78,17 @@ export default function PayrollRunsList() {
         }
     };
 
-    const getActionButton = (payroll: PayrollRun) => {
+    const getActionButton = (payroll: PayrollRun, isMobile: boolean = false) => {
+        const baseClasses = isMobile 
+            ? "w-full px-3 py-2 text-xs font-medium rounded-md"
+            : "px-3 py-1 text-sm font-medium rounded-md";
+        
         switch (payroll.status) {
             case "DRAFT":
                 return (
                     <button
                         onClick={() => handleAction("review", payroll._id)}
-                        className="px-3 py-1 text-sm font-medium text-white bg-blue-600 dark:bg-blue-600 rounded-md hover:bg-blue-700 dark:hover:bg-blue-700"
+                        className={`${baseClasses} text-white bg-blue-600 dark:bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-700`}
                     >
                         Review
                     </button>
@@ -93,7 +97,7 @@ export default function PayrollRunsList() {
                 return (
                     <button
                         onClick={() => handleAction("approve", payroll._id)}
-                        className="px-3 py-1 text-sm font-medium text-white bg-purple-600 dark:bg-purple-600 rounded-md hover:bg-purple-700 dark:hover:bg-purple-700"
+                        className={`${baseClasses} text-white bg-purple-600 dark:bg-purple-600 hover:bg-purple-700 dark:hover:bg-purple-700`}
                     >
                         Approve
                     </button>
@@ -102,7 +106,7 @@ export default function PayrollRunsList() {
                 return (
                     <button
                         onClick={() => handleAction("pay", payroll._id)}
-                        className="px-3 py-1 text-sm font-medium text-white bg-green-600 dark:bg-green-600 rounded-md hover:bg-green-700 dark:hover:bg-green-700"
+                        className={`${baseClasses} text-white bg-green-600 dark:bg-green-600 hover:bg-green-700 dark:hover:bg-green-700`}
                     >
                         Pay
                     </button>
@@ -111,7 +115,7 @@ export default function PayrollRunsList() {
                 return (
                     <button
                         onClick={() => router.push(`/payroll/${payroll._id}/items`)}
-                        className="px-3 py-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-900/50"
+                        className={`${baseClasses} text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-900/50`}
                     >
                         View Payslips
                     </button>
@@ -173,7 +177,46 @@ export default function PayrollRunsList() {
 
     return (
         <>
-            <div className="overflow-x-auto">
+            {/* Mobile Card View */}
+            <div className="lg:hidden space-y-3 p-3 sm:p-4">
+                {payrollRuns && payrollRuns.length > 0 ? (
+                    payrollRuns.map((payroll) => (
+                        <div key={payroll._id} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm">
+                            <div className="space-y-3">
+                                <div>
+                                    <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Period</div>
+                                    <div className="text-sm font-medium text-gray-900 dark:text-white">
+                                        {format(new Date(payroll.periodStart), "MMM dd, yyyy")} -{" "}
+                                        {format(new Date(payroll.periodEnd), "MMM dd, yyyy")}
+                                    </div>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Status</div>
+                                        <StatusBadge status={payroll.status} />
+                                    </div>
+                                    <div className="text-right">
+                                        <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Created</div>
+                                        <div className="text-xs text-gray-600 dark:text-gray-300">
+                                            {format(new Date(payroll.createdAt), "MMM dd, yyyy")}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+                                    {getActionButton(payroll, true)}
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <div className="text-center py-8 text-sm text-gray-500 dark:text-gray-400">
+                        No payroll runs found. Create your first payroll run to get started.
+                    </div>
+                )}
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden lg:block overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>

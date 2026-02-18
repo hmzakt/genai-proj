@@ -48,6 +48,14 @@ export default function Navbar() {
                         >
                             Contact
                         </Link>
+                        {user && (
+                            <Link
+                                href="/dashboard"
+                                className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-200"
+                            >
+                                Dashboard
+                            </Link>
+                        )}
                         {!user && (
                             <Link
                                 href="/login"
@@ -129,6 +137,15 @@ export default function Navbar() {
                         >
                             Contact
                         </Link>
+                        {user && (
+                            <Link
+                                href="/dashboard"
+                                className="block mx-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white text-center rounded-lg font-medium"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Dashboard
+                            </Link>
+                        )}
                         {!user && (
                             <Link
                                 href="/login"

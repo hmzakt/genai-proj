@@ -15,7 +15,7 @@ export default function PayrollItemsPage() {
             <Navbar />
             <div className="flex min-h-[calc(100vh-4rem)] mt-16">
                 <Sidebar />
-                <div className="flex-1 p-8">
+                <div className="flex-1 w-0 lg:w-auto min-w-0 p-3 sm:p-4 lg:p-6 xl:p-8">
                     <div className="max-w-7xl mx-auto">
                         <div className="mb-6">
                             <button
@@ -24,15 +24,15 @@ export default function PayrollItemsPage() {
                             >
                                 ← Back to Payroll Runs
                             </button>
-                            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
                                 Payroll Items / Payslips
                             </h1>
-                            <p className="text-gray-600 dark:text-gray-300 mt-1">
+                            <p className="text-gray-600 dark:text-gray-300 mt-1 text-sm sm:text-base">
                                 View employee payslips and payment status
                             </p>
                         </div>
 
-                        <div className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700">
+                        <div className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 overflow-x-auto">
                             <PayrollItemsTable payrollRunId={payrollRunId} />
                         </div>
                     </div>

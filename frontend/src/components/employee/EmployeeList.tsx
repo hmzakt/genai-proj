@@ -55,7 +55,74 @@ export default function EmployeeList() {
 
     return (
         <>
-            <div className="overflow-x-auto">
+            {/* Mobile Card View */}
+            <div className="lg:hidden space-y-3 p-3 sm:p-4">
+                {employees && employees.length > 0 ? (
+                    employees.map((employee) => (
+                        <div
+                            key={employee._id}
+                            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+                            onClick={() => router.push(`/employees/${employee._id}`)}
+                        >
+                            <div className="space-y-3">
+                                <div className="flex items-start justify-between">
+                                    <div className="flex-1">
+                                        <div className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">Employee Code</div>
+                                        <div className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
+                                            {employee.employeeCode}
+                                        </div>
+                                        <div className="text-sm font-medium text-gray-900 dark:text-white">
+                                            {employee.name}
+                                        </div>
+                                        <div className="text-xs text-gray-600 dark:text-gray-300 mt-1">
+                                            {employee.email}
+                                        </div>
+                                    </div>
+                                    <span
+                                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${getStatusBadgeColor(
+                                            employee.status
+                                        )}`}
+                                    >
+                                        {employee.status}
+                                    </span>
+                                </div>
+                                
+                                <div className="grid grid-cols-2 gap-3 pt-2 border-t border-gray-200 dark:border-gray-700">
+                                    <div>
+                                        <div className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">Department</div>
+                                        <div className="text-xs text-gray-900 dark:text-white">{employee.department || "-"}</div>
+                                    </div>
+                                    <div>
+                                        <div className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">Role</div>
+                                        <div className="text-xs text-gray-900 dark:text-white">{employee.role || "-"}</div>
+                                    </div>
+                                </div>
+                                
+                                <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+                                    <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Joining Date</div>
+                                    <div className="text-xs text-gray-900 dark:text-white mb-3">
+                                        {format(new Date(employee.dateOfJoining), "MMM dd, yyyy")}
+                                    </div>
+                                    <button
+                                        onClick={(e) => handleCashfreeOnboarding(employee._id, e)}
+                                        disabled={loadingCashfree === employee._id}
+                                        className="w-full px-3 py-2 text-xs font-medium text-white bg-indigo-600 dark:bg-indigo-600 hover:bg-indigo-700 dark:hover:bg-indigo-700 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {loadingCashfree === employee._id ? "Loading..." : "Setup Cashfree"}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <div className="text-center py-8 text-sm text-gray-500 dark:text-gray-400">
+                        No employees found. Start by onboarding your first employee.
+                    </div>
+                )}
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden lg:block overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>

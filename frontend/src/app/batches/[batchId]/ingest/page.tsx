@@ -131,9 +131,9 @@ function IngestContent({ batchId }: { batchId: string }) {
             )}
 
             {/* Step 2: Process */}
-            <div className={`border-t pt-8 ${!uploadComplete ? 'opacity-50 pointer-events-none' : ''}`}>
-                <h3 className="text-lg font-medium text-gray-900 mb-4">Step 2: Process Screening</h3>
-                <button onClick={handleProcess} disabled={isProcessing} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none disabled:bg-gray-400">
+            <div className={`border-t border-gray-200 dark:border-gray-700 pt-6 sm:pt-8 ${!uploadComplete ? 'opacity-50 pointer-events-none' : ''}`}>
+                <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-white mb-4">Step 2: Process Screening</h3>
+                <button onClick={handleProcess} disabled={isProcessing} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm sm:text-base font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none disabled:bg-gray-400">
                     Process Batch
                 </button>
             </div>
@@ -145,17 +145,17 @@ export default function IngestBatchPage(props: Props) {
     const params = use(props.params);
 
     return (
-        <div className="flex min-h-screen bg-gray-100">
+        <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
             <Sidebar />
-            <div className="flex-1 flex flex-col overflow-hidden">
-                <header className="flex justify-between items-center bg-white shadow-sm h-16 px-6">
-                    <h2 className="text-xl font-semibold text-gray-800">
+            <div className="flex-1 flex flex-col overflow-hidden w-0 lg:w-auto min-w-0">
+                <header className="flex justify-between items-center bg-white dark:bg-gray-800 shadow-sm min-h-16 px-4 sm:px-6 py-3 sm:py-4">
+                    <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">
                         Ingest Resumes
                     </h2>
                 </header>
 
-                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
-                    <Suspense fallback={<div>Loading source...</div>}>
+                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-gray-900 p-4 sm:p-6">
+                    <Suspense fallback={<div className="text-gray-700 dark:text-gray-300">Loading source...</div>}>
                         <IngestContent batchId={params.batchId} />
                     </Suspense>
                 </main>

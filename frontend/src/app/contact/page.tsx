@@ -38,25 +38,25 @@ export default function ContactPage() {
         <div className="min-h-screen bg-white dark:bg-gray-900">
             <Navbar />
 
-            <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+            <div className="pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-6xl mx-auto">
                     {/* Header */}
-                    <div className="text-center mb-16">
-                        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+                    <div className="text-center mb-12 sm:mb-16">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
                             Get in{" "}
                             <span className="text-indigo-600 dark:text-indigo-400">
                                 Touch
                             </span>
                         </h1>
-                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-2">
                             Have questions? Want to book a trial? We'd love to hear from you.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
                         {/* Contact Form */}
-                        <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-8">
-                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                        <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-6 sm:p-8">
+                            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
                                 Send us a message
                             </h2>
 
@@ -175,9 +175,9 @@ export default function ContactPage() {
                         </div>
 
                         {/* Contact Information */}
-                        <div className="space-y-8">
-                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8">
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                        <div className="space-y-6 sm:space-y-8">
+                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 sm:p-8">
+                                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
                                     Contact Information
                                 </h2>
 
@@ -273,22 +273,22 @@ export default function ContactPage() {
                             </div>
 
                             {/* Quick Links */}
-                            <div className="bg-indigo-600 dark:bg-indigo-700 rounded-2xl p-8 text-white">
-                                <h3 className="text-2xl font-bold mb-4">Ready to Start?</h3>
-                                <p className="text-indigo-100 mb-6">
+                            <div className="bg-indigo-600 dark:bg-indigo-700 rounded-2xl p-6 sm:p-8 text-white">
+                                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Ready to Start?</h3>
+                                <p className="text-sm sm:text-base text-indigo-100 mb-4 sm:mb-6">
                                     Book a personalized demo and see how our AI platform can
                                     transform your hiring process.
                                 </p>
                                 <div className="space-y-3">
                                     <a
                                         href="/signup"
-                                        className="block w-full px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold text-center hover:bg-gray-100 transition-colors"
+                                        className="block w-full px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold text-center hover:bg-gray-100 transition-colors text-sm sm:text-base"
                                     >
                                         Start Free Trial
                                     </a>
                                     <a
                                         href="/pricing"
-                                        className="block w-full px-6 py-3 bg-indigo-700 text-white rounded-lg font-semibold text-center hover:bg-indigo-800 transition-colors"
+                                        className="block w-full px-6 py-3 bg-indigo-700 text-white rounded-lg font-semibold text-center hover:bg-indigo-800 transition-colors text-sm sm:text-base"
                                     >
                                         View Pricing
                                     </a>

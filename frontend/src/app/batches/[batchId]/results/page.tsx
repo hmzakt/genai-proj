@@ -45,93 +45,95 @@ export default function ResultsPage(props: Props) {
     };
 
     return (
-        <div className="flex min-h-screen bg-gray-100">
+        <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
             <Sidebar />
-            <div className="flex-1 flex flex-col overflow-hidden">
-                <header className="flex justify-between items-center bg-white shadow-sm h-16 px-6">
-                    <h2 className="text-xl font-semibold text-gray-800">Batch Results</h2>
-                    <Link href="/dashboard" className="text-indigo-600 hover:text-indigo-900">
+            <div className="flex-1 flex flex-col overflow-hidden w-0 lg:w-auto min-w-0">
+                <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white dark:bg-gray-800 shadow-sm min-h-16 px-4 sm:px-6 py-3 sm:py-4">
+                    <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">Batch Results</h2>
+                    <Link href="/dashboard" className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300 text-sm sm:text-base">
                         Back to Dashboard
                     </Link>
                 </header>
 
-                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-gray-900 p-3 sm:p-4 lg:p-6">
                     <div className="flex flex-col">
                         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                <div className="shadow overflow-hidden border-b border-gray-200 dark:border-gray-700 sm:rounded-lg">
                                     {loading ? (
-                                        <div className="text-center py-10 bg-white">Loading results...</div>
+                                        <div className="text-center py-10 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300">Loading results...</div>
                                     ) : candidates.length === 0 ? (
-                                        <div className="text-center py-10 bg-white">No results found yet. Processing might still be in progress.</div>
+                                        <div className="text-center py-10 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300">No results found yet. Processing might still be in progress.</div>
                                     ) : (
-                                        <table className="min-w-full divide-y divide-gray-200">
-                                            <thead className="bg-gray-50">
-                                                <tr>
-                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Rank
-                                                    </th>
-                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Candidate Name
-                                                    </th>
-                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Score
-                                                    </th>
-                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Status
-                                                    </th>
-                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Summary
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody className="bg-white divide-y divide-gray-200">
-                                                {candidates.map((candidate, index) => (
-                                                    <tr key={candidate._id || index}>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            #{index + 1}
-                                                        </td>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            {candidate.resumeUrl ? (
-                                                                <a
-                                                                    href={candidate.resumeUrl}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    className="text-indigo-600 hover:text-indigo-900 font-medium hover:underline"
-                                                                >
-                                                                    {candidate.name || `Candidate ${index + 1}`}
-                                                                </a>
-                                                            ) : (
-                                                                <span>{candidate.name || `Candidate ${index + 1}`}</span>
-                                                            )}
-                                                        </td>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">
-                                                            {candidate.score}
-                                                        </td>
-                                                        <td className="px-6 py-4 whitespace-nowrap">
-                                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(candidate.status)}`}>
-                                                                {candidate.status}
-                                                            </span>
-                                                        </td>
-                                                        <td className="px-6 py-4 text-sm text-gray-500">
-                                                            <div className="max-w-md">
-                                                                <p className={`${candidate._id === expandedSummary ? '' : 'line-clamp-2'}`}>
-                                                                    {candidate.summary}
-                                                                </p>
-                                                                {candidate.summary && candidate.summary.length > 100 && (
-                                                                    <button
-                                                                        onClick={() => setExpandedSummary(expandedSummary === candidate._id ? null : candidate._id)}
-                                                                        className="text-indigo-600 hover:text-indigo-900 text-xs mt-1 font-medium"
-                                                                    >
-                                                                        {expandedSummary === candidate._id ? 'Show less' : 'Show more'}
-                                                                    </button>
-                                                                )}
-                                                            </div>
-                                                        </td>
+                                        <div className="overflow-x-auto">
+                                            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                                <thead className="bg-gray-50 dark:bg-gray-800">
+                                                    <tr>
+                                                        <th scope="col" className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                                            Rank
+                                                        </th>
+                                                        <th scope="col" className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                                            Candidate Name
+                                                        </th>
+                                                        <th scope="col" className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                                            Score
+                                                        </th>
+                                                        <th scope="col" className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                                            Status
+                                                        </th>
+                                                        <th scope="col" className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                                            Summary
+                                                        </th>
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                                    {candidates.map((candidate, index) => (
+                                                        <tr key={candidate._id || index}>
+                                                            <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                                                #{index + 1}
+                                                            </td>
+                                                            <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                                                {candidate.resumeUrl ? (
+                                                                    <a
+                                                                        href={candidate.resumeUrl}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300 font-medium hover:underline"
+                                                                    >
+                                                                        {candidate.name || `Candidate ${index + 1}`}
+                                                                    </a>
+                                                                ) : (
+                                                                    <span>{candidate.name || `Candidate ${index + 1}`}</span>
+                                                                )}
+                                                            </td>
+                                                            <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white font-bold">
+                                                                {candidate.score}
+                                                            </td>
+                                                            <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
+                                                                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(candidate.status)}`}>
+                                                                    {candidate.status}
+                                                                </span>
+                                                            </td>
+                                                            <td className="px-3 sm:px-6 py-4 text-sm text-gray-500 dark:text-gray-300">
+                                                                <div className="max-w-md">
+                                                                    <p className={`${candidate._id === expandedSummary ? '' : 'line-clamp-2'}`}>
+                                                                        {candidate.summary}
+                                                                    </p>
+                                                                    {candidate.summary && candidate.summary.length > 100 && (
+                                                                        <button
+                                                                            onClick={() => setExpandedSummary(expandedSummary === candidate._id ? null : candidate._id)}
+                                                                            className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300 text-xs mt-1 font-medium"
+                                                                        >
+                                                                            {expandedSummary === candidate._id ? 'Show less' : 'Show more'}
+                                                                        </button>
+                                                                    )}
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     )}
                                 </div>
                             </div>

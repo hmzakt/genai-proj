@@ -56,24 +56,24 @@ export default function PricingPage() {
         <div className="min-h-screen bg-white dark:bg-gray-900">
             <Navbar />
 
-            <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+            <div className="pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
-                    <div className="text-center mb-16">
-                        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+                    <div className="text-center mb-12 sm:mb-16">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
                             Simple, Transparent{" "}
                             <span className="text-indigo-600 dark:text-indigo-400">
                                 Pricing
                             </span>
                         </h1>
-                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-2">
                             Choose the perfect plan for your hiring needs. All plans include a
                             14-day free trial.
                         </p>
                     </div>
 
                     {/* Pricing Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
                         {plans.map((plan, index) => (
                             <div
                                 key={index}
@@ -154,33 +154,33 @@ export default function PricingPage() {
 
                     {/* FAQ Section */}
                     <div className="max-w-3xl mx-auto">
-                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6 sm:mb-8 text-center">
                             Frequently Asked Questions
                         </h2>
-                        <div className="space-y-6">
-                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                        <div className="space-y-4 sm:space-y-6">
+                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 sm:p-6">
+                                <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2">
                                     When will pricing be available?
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-300">
+                                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
                                     We're currently finalizing our pricing structure. Contact us
                                     to discuss your needs and get early access pricing.
                                 </p>
                             </div>
-                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 sm:p-6">
+                                <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2">
                                     Can I change plans later?
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-300">
+                                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
                                     Yes! You can upgrade or downgrade your plan at any time. Changes
                                     will be reflected in your next billing cycle.
                                 </p>
                             </div>
-                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 sm:p-6">
+                                <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2">
                                     What payment methods do you accept?
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-300">
+                                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
                                     We accept all major credit cards, bank transfers, and can set up
                                     custom payment terms for enterprise customers.
                                 </p>

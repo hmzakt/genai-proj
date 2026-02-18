@@ -87,35 +87,35 @@ export default function HRChatPage() {
             <div className="flex h-[calc(100vh-4rem)] mt-16 overflow-hidden">
                 <Sidebar />
 
-                <main className="flex-1 flex flex-col h-full relative bg-white dark:bg-gray-900">
+                <main className="flex-1 flex flex-col h-full relative bg-white dark:bg-gray-900 w-0 lg:w-auto min-w-0">
                     {/* Header */}
-                    <header className="flex-none bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 sm:px-8 py-4 z-10">
+                    <header className="flex-none bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-3 sm:px-4 lg:px-6 xl:px-8 py-2.5 sm:py-3 lg:py-4 z-10">
                         <div className="max-w-4xl mx-auto">
-                            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                            <h1 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">
                                 HR Assistant
                             </h1>
-                            <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                            <p className="text-xs text-gray-600 dark:text-gray-300 mt-0.5 sm:mt-1">
                                 Ask questions about company policies, payroll, and benefits.
                             </p>
                         </div>
                     </header>
 
                     {/* Chat Area */}
-                    <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:px-8 lg:pt-8 lg:pb-4 scroll-smooth bg-white dark:bg-gray-900">
-                        <div className="max-w-4xl mx-auto space-y-4">
+                    <div className="flex-1 overflow-y-auto p-2 sm:p-3 lg:p-4 xl:p-6 scroll-smooth bg-white dark:bg-gray-900">
+                        <div className="max-w-4xl mx-auto space-y-2 sm:space-y-3 lg:space-y-4">
                             {messages.length === 0 ? (
                                 // Empty State
-                                <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
-                                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 dark:bg-indigo-900/30 mb-6">
-                                        <span className="text-3xl">👋</span>
+                                <div className="flex flex-col items-center justify-center min-h-[40vh] sm:min-h-[50vh] lg:min-h-[60vh] px-2 sm:px-4">
+                                    <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 rounded-full bg-indigo-100 dark:bg-indigo-900/30 mb-3 sm:mb-4 lg:mb-6">
+                                        <span className="text-xl sm:text-2xl lg:text-3xl">👋</span>
                                     </div>
-                                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 text-center">
+                                    <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 text-center">
                                         Welcome to HR Assistant
                                     </h2>
-                                    <p className="text-gray-600 dark:text-gray-300 max-w-md mx-auto mb-8 text-center">
+                                    <p className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300 max-w-md mx-auto mb-4 sm:mb-6 lg:mb-8 text-center px-2">
                                         I can answer your questions about HR policies, leave applications, payroll processes, and more.
                                     </p>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl w-full">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 max-w-2xl w-full px-2">
                                         {[
                                             "How are bonuses calculated?",
                                             "What is the remote work policy?",
@@ -125,7 +125,7 @@ export default function HRChatPage() {
                                             <button
                                                 key={i}
                                                 onClick={() => handleSendMessage(question)}
-                                                className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-indigo-500 dark:hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 hover:shadow-sm transition-all text-sm text-left text-gray-700 dark:text-gray-300"
+                                                className="p-2.5 sm:p-3 lg:p-4 rounded-lg sm:rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-indigo-500 dark:hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 hover:shadow-sm transition-all text-xs sm:text-sm text-left text-gray-700 dark:text-gray-300"
                                             >
                                                 "{question}"
                                             </button>

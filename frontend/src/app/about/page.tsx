@@ -8,41 +8,41 @@ export default function AboutPage() {
         <div className="min-h-screen bg-white dark:bg-gray-900">
             <Navbar />
 
-            <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+            <div className="pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}
-                    <div className="text-center mb-16">
-                        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+                    <div className="text-center mb-12 sm:mb-16">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
                             About{" "}
                             <span className="text-indigo-600 dark:text-indigo-400">
                                 Our Mission
                             </span>
                         </h1>
-                        <p className="text-xl text-gray-600 dark:text-gray-300">
+                        <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 px-2">
                             We're on a mission to revolutionize the hiring process with
                             AI-powered intelligence.
                         </p>
                     </div>
 
                     {/* Story Section */}
-                    <div className="mb-16">
-                        <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 md:p-12">
-                            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                    <div className="mb-12 sm:mb-16">
+                        <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 sm:p-8 md:p-12">
+                            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
                                 Our Story
                             </h2>
-                            <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                            <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
                                 Founded in 2024, HR AI Platform was born from a simple
                                 observation: hiring teams spend countless hours manually
                                 screening resumes, often missing great candidates due to time
                                 constraints and unconscious bias.
                             </p>
-                            <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                            <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
                                 We believed there had to be a better way. By combining
                                 cutting-edge artificial intelligence with deep HR expertise, we
                                 created a platform that not only saves time but also improves
                                 the quality of hiring decisions.
                             </p>
-                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
                                 Today, we're proud to serve over 500 companies worldwide,
                                 helping them find the right talent faster and more efficiently
                                 than ever before.
@@ -51,11 +51,11 @@ export default function AboutPage() {
                     </div>
 
                     {/* Values Section */}
-                    <div className="mb-16">
-                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                    <div className="mb-12 sm:mb-16">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6 sm:mb-8 text-center">
                             Our Values
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                             <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow">
                                 <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-4">
                                     <svg
@@ -159,15 +159,15 @@ export default function AboutPage() {
                     </div>
 
                     {/* Team Section */}
-                    <div className="text-center bg-indigo-600 dark:bg-indigo-700 rounded-2xl p-12 text-white">
-                        <h2 className="text-3xl font-bold mb-4">Join Our Team</h2>
-                        <p className="text-xl text-indigo-100 mb-6">
+                    <div className="text-center bg-indigo-600 dark:bg-indigo-700 rounded-2xl p-6 sm:p-8 lg:p-12 text-white">
+                        <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Join Our Team</h2>
+                        <p className="text-base sm:text-lg lg:text-xl text-indigo-100 mb-4 sm:mb-6 px-2">
                             We're always looking for talented individuals who share our
                             passion for innovation and excellence.
                         </p>
                         <a
                             href="#"
-                            className="inline-block px-8 py-3 bg-white text-indigo-600 rounded-xl font-semibold hover:bg-gray-100 transition-colors"
+                            className="inline-block px-6 sm:px-8 py-2 sm:py-3 bg-white text-indigo-600 rounded-xl font-semibold hover:bg-gray-100 transition-colors text-sm sm:text-base"
                         >
                             View Open Positions
                         </a>
