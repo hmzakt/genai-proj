@@ -13,7 +13,8 @@ export async function createPayrollRun(req, res) {
         const payrollRun = await runPayroll({
             periodStart,
             periodEnd,
-            createdBy: req.user.uid
+            createdBy: req.user.uid,
+            companyId: req.user.companyId,
         });
 
         res.status(201).json(payrollRun);
@@ -25,10 +26,12 @@ export async function createPayrollRun(req, res) {
 
 export async function reviewPayroll(req, res) {
     try {
-        const payrollRun = await markPayrollReviewed(
-            req.params.id,
-            req.user.uid
-        );
+        // Verify ownership
+        const run = await PayrollRun.findById(req.params.id);
+        if (!run) return res.status(404).json({ error: "Payroll run not found" });
+        if (!run.companyId.equals(req.user.companyId)) return res.status(403).json({ error: "Access denied" });
+
+        const payrollRun = await markPayrollReviewed(req.params.id, req.user.uid);
         res.json(payrollRun);
     } catch (err) {
         res.status(400).json({ error: err.message });
@@ -38,11 +41,12 @@ export async function reviewPayroll(req, res) {
 
 export async function approvePayrollRun(req, res) {
     try {
-        const payrollRun = await approvePayroll(
-            req.params.id,
-            req.user.uid
-        );
-        res.json(payrollRun)
+        const run = await PayrollRun.findById(req.params.id);
+        if (!run) return res.status(404).json({ error: "Payroll run not found" });
+        if (!run.companyId.equals(req.user.companyId)) return res.status(403).json({ error: "Access denied" });
+
+        const payrollRun = await approvePayroll(req.params.id, req.user.uid);
+        res.json(payrollRun);
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
@@ -50,6 +54,10 @@ export async function approvePayrollRun(req, res) {
 
 export async function payPayroll(req, res) {
     try {
+        const run = await PayrollRun.findById(req.params.id);
+        if (!run) return res.status(404).json({ error: "Payroll run not found" });
+        if (!run.companyId.equals(req.user.companyId)) return res.status(403).json({ error: "Access denied" });
+
         const result = await executePayrollPayments(req.params.id);
         res.json(result);
     } catch (err) {
@@ -59,6 +67,10 @@ export async function payPayroll(req, res) {
 
 export async function retryPayroll(req, res) {
     try {
+        const run = await PayrollRun.findById(req.params.id);
+        if (!run) return res.status(404).json({ error: "Payroll run not found" });
+        if (!run.companyId.equals(req.user.companyId)) return res.status(403).json({ error: "Access denied" });
+
         const result = await executePayrollPayments(req.params.id);
         res.json(result);
     } catch (err) {
@@ -68,30 +80,42 @@ export async function retryPayroll(req, res) {
 
 
 export async function listPayrollRuns(req, res) {
-    const runs = await PayrollRun.find().sort({ createdAt: -1 });
-    res.json(runs);
+    try {
+        const runs = await PayrollRun.find({ companyId: req.user.companyId }).sort({ createdAt: -1 });
+        res.json(runs);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 }
 
 export async function getPayrollItems(req, res) {
-    const PaymentLog = (await import("../models/paymentSystem/paymentLog.model.js")).default;
+    try {
+        const PaymentLog = (await import("../models/paymentSystem/paymentLog.model.js")).default;
 
-    const items = await PayrollItem.find({
-        payrollRunId: req.params.id,
-    }).populate("employeeId");
+        const run = await PayrollRun.findById(req.params.id);
+        if (!run) return res.status(404).json({ error: "Payroll run not found" });
+        if (!run.companyId.equals(req.user.companyId)) return res.status(403).json({ error: "Access denied" });
 
-    // Fetch payment status for each item
-    const itemsWithPaymentStatus = await Promise.all(
-        items.map(async (item) => {
-            const paymentLog = await PaymentLog.findOne({
-                payrollItemId: item._id,
-            }).sort({ createdAt: -1 });
+        const items = await PayrollItem.find({
+            payrollRunId: req.params.id,
+        }).populate("employeeId");
 
-            return {
-                ...item.toObject(),
-                paymentStatus: paymentLog ? paymentLog.status : null,
-            };
-        })
-    );
+        // Fetch payment status for each item
+        const itemsWithPaymentStatus = await Promise.all(
+            items.map(async (item) => {
+                const paymentLog = await PaymentLog.findOne({
+                    payrollItemId: item._id,
+                }).sort({ createdAt: -1 });
 
-    res.json(itemsWithPaymentStatus);
+                return {
+                    ...item.toObject(),
+                    paymentStatus: paymentLog ? paymentLog.status : null,
+                };
+            })
+        );
+
+        res.json(itemsWithPaymentStatus);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 }

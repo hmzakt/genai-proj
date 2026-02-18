@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const payrollRunSchema = new mongoose.Schema(
   {
+    companyId: { type: mongoose.Schema.Types.ObjectId, ref: "Company", required: true },
     periodStart: { type: Date, required: true },
     periodEnd: { type: Date, required: true },
     status: {

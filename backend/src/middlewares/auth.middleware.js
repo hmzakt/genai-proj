@@ -1,12 +1,13 @@
 import admin from "../firebaseAdmin.js";
+import Company from "../models/company.model.js";
 
 export const authenticate = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ 
+    return res.status(401).json({
       success: false,
-      message: "No token provided" 
+      message: "No token provided"
     });
   }
 
@@ -22,19 +23,27 @@ export const authenticate = async (req, res, next) => {
       });
     }
 
+    // Resolve company on first login
+    const company = await Company.findOneAndUpdate(
+      { firebaseUid: decodedToken.uid },
+      { $setOnInsert: { firebaseUid: decodedToken.uid, email: decodedToken.email, name: decodedToken.email } },
+      { upsert: true, new: true }
+    );
+
     // Attach user info to request
     req.user = {
       uid: decodedToken.uid,
       email: decodedToken.email,
       emailVerified: decodedToken.email_verified,
+      companyId: company ? company._id : null,
     };
 
     next();
   } catch (error) {
     console.error("Token verification error:", error);
-    return res.status(401).json({ 
+    return res.status(401).json({
       success: false,
-      message: "Invalid or expired token" 
+      message: "Invalid or expired token"
     });
   }
 };

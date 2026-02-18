@@ -1,5 +1,6 @@
 import axios from "axios";
 import PaymentAdapter from "./paymentAdapter.interface.js";
+import { generateCashfreeSignature } from "../utils/cashfreeSignature.util.js";
 
 const CASHFREE_BASE_URL = "https://payout-api.cashfree.com/payout/v1";
 
@@ -47,6 +48,7 @@ export default class CashfreeAdapter extends PaymentAdapter {
                         "x-client-id": this.appId,
                         "x-client-secret": this.secretKey,
                         "x-api-version": "2024-01-01",
+                        "X-Cf-Signature": generateCashfreeSignature(this.appId),
                         "Content-Type": "application/json",
                     },
                 }

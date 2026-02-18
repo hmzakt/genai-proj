@@ -6,7 +6,7 @@ export async function createPayrollProfile(data) {
     employmentType: data.employmentType,
     baseSalary: data.baseSalary,
     payFrequency: data.payFrequency,
-    incentivePlanId: data.incentivePlanId,
+    ...(data.incentivePlanId ? { incentivePlanId: data.incentivePlanId } : {}),
     effectiveFrom: data.effectiveFrom,
   });
 }

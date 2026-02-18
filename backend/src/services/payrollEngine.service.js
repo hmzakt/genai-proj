@@ -64,9 +64,10 @@ function calculateTax(grossPay) {
 }
 
 
-export async function runPayroll({ periodStart, periodEnd, createdBy }) {
-    
+export async function runPayroll({ periodStart, periodEnd, createdBy, companyId }) {
+
     const existingRun = await PayrollRun.findOne({
+        companyId,
         periodStart,
         periodEnd,
         locked: true,
@@ -77,6 +78,7 @@ export async function runPayroll({ periodStart, periodEnd, createdBy }) {
     }
 
     const payrollRun = await PayrollRun.create({
+        companyId,
         periodStart,
         periodEnd,
         createdBy,
@@ -84,7 +86,7 @@ export async function runPayroll({ periodStart, periodEnd, createdBy }) {
         locked: false
     });
 
-    const employees = await Employee.find({ status: "ACTIVE" });
+    const employees = await Employee.find({ status: "ACTIVE", companyId });
 
     for (const employee of employees) {
         const profile = await PayrollProfile.findOne({
@@ -134,3 +136,4 @@ export async function runPayroll({ periodStart, periodEnd, createdBy }) {
     }
     return payrollRun;
 }
+

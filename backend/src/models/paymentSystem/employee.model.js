@@ -1,34 +1,38 @@
 import mongoose from "mongoose"
 
 const employeeSchema = new mongoose.Schema({
-    employeeCode : {
-        type : String,
-        unique : true,
-        required : true 
+    companyId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Company",
+        required: true,
     },
-    name : {
-        type : String,
-        required : true 
+    employeeCode: {
+        type: String,
+        required: true
     },
-    email : {
-        type : String,
-        requied : true 
+    name: {
+        type: String,
+        required: true
     },
-    department : {
-        type : String 
+    email: {
+        type: String,
+        requied: true
     },
-    role : {
-        type : String 
+    department: {
+        type: String
     },
-    dateOfJoining : {
-        type : Date,
-        requied : true 
+    role: {
+        type: String
     },
-    status : {
-        type : String,
-        enum : ["ACTIVE", "ON_HOLD", "EXITED"],
-        default : "ACTIVE"
+    dateOfJoining: {
+        type: Date,
+        requied: true
+    },
+    status: {
+        type: String,
+        enum: ["ACTIVE", "ON_HOLD", "EXITED"],
+        default: "ACTIVE"
     }
-}, {timestamps : true})
+}, { timestamps: true })
 
 export default mongoose.model("Employee", employeeSchema);

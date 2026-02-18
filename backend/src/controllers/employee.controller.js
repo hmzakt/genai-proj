@@ -9,7 +9,7 @@ import IncentivePlan from "../models/paymentSystem/incentivePlan.model.js";
 // List all employees
 export async function listEmployees(req, res) {
     try {
-        const employees = await Employee.find().sort({ createdAt: -1 });
+        const employees = await Employee.find({ companyId: req.user.companyId }).sort({ createdAt: -1 });
         res.json(employees);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -22,6 +22,10 @@ export async function getEmployee(req, res) {
         const employee = await Employee.findById(req.params.id);
         if (!employee) {
             return res.status(404).json({ error: "Employee not found" });
+        }
+
+        if (!employee.companyId.equals(req.user.companyId)) {
+            return res.status(403).json({ error: "Access denied" });
         }
 
         const payrollProfile = await PayrollProfile.findOne({
@@ -45,27 +49,37 @@ export async function getEmployee(req, res) {
 // Create new employee (Step 1)
 export async function createEmployeeController(req, res) {
     try {
-        const employee = await createEmployee(req.body);
+        const employee = await createEmployee({
+            ...req.body,
+            companyId: req.user.companyId,
+        });
         res.status(201).json(employee);
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
 }
 
-// Update employee
+// Update employee (ownership verified)
 export async function updateEmployee(req, res) {
     try {
-        const employee = await Employee.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true, runValidators: true }
-        );
+        const employee = await Employee.findById(req.params.id);
 
         if (!employee) {
             return res.status(404).json({ error: "Employee not found" });
         }
 
-        res.json(employee);
+        // Ensure the employee belongs to the requesting user's company
+        if (!employee.companyId.equals(req.user.companyId)) {
+            return res.status(403).json({ error: "Access denied" });
+        }
+
+        const updated = await Employee.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+
+        res.json(updated);
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
@@ -77,6 +91,7 @@ export async function createPayrollProfileController(req, res) {
         const payrollProfile = await createPayrollProfile(req.body);
         res.status(201).json(payrollProfile);
     } catch (err) {
+        console.error("createPayrollProfile error:", err.message, JSON.stringify(err.errors));
         res.status(400).json({ error: err.message });
     }
 }
@@ -91,7 +106,7 @@ export async function createBankAccountController(req, res) {
     }
 }
 
-// Start Cashfree onboarding
+// Start Cashfree onboarding (ownership verified)
 export async function startCashfreeOnboardingController(req, res) {
     try {
         const { employeeId, bankAccountData } = req.body;
@@ -99,6 +114,9 @@ export async function startCashfreeOnboardingController(req, res) {
         const employee = await Employee.findById(employeeId);
         if (!employee) {
             return res.status(404).json({ error: "Employee not found" });
+        }
+        if (!employee.companyId.equals(req.user.companyId)) {
+            return res.status(403).json({ error: "Access denied" });
         }
 
         const result = await startCashfreeOnboarding(employee, bankAccountData);

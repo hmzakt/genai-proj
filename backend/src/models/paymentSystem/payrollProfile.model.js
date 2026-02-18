@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import { encryptNumber, decryptNumber } from "../../utils/crypto.util.js";
+
+const ENCRYPTED_NUMBER_FIELDS = ["baseSalary"];
 
 const payrollProfileSchema = new mongoose.Schema(
   {
@@ -12,7 +15,7 @@ const payrollProfileSchema = new mongoose.Schema(
       enum: ["FULL_TIME", "CONTRACT", "INTERN"],
       required: true,
     },
-    baseSalary: { type: Number, required: true },
+    baseSalary: { type: mongoose.Schema.Types.Mixed, required: true },
     payFrequency: {
       type: String,
       enum: ["MONTHLY", "DAILY"],
@@ -28,5 +31,27 @@ const payrollProfileSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// Encrypt
+payrollProfileSchema.pre("save", async function () {
+  for (const field of ENCRYPTED_NUMBER_FIELDS) {
+    if (this.isModified(field) && this[field] !== undefined) {
+      this[field] = encryptNumber(this[field]);
+    }
+  }
+});
+
+// Decrypt 
+payrollProfileSchema.post("init", function () {
+  try {
+    for (const field of ENCRYPTED_NUMBER_FIELDS) {
+      if (this[field] !== undefined) {
+        this[field] = decryptNumber(this[field]);
+      }
+    }
+  } catch (err) {
+    console.error("PayrollProfile decryption error:", err.message);
+  }
+});
 
 export default mongoose.model("PayrollProfile", payrollProfileSchema);

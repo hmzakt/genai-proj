@@ -1,5 +1,6 @@
 import axios from "axios";
 import BankAccount from "../models/paymentSystem/bankAccount.model.js";
+import { generateCashfreeSignature } from "../utils/cashfreeSignature.util.js";
 
 // Allow override for Test environment, otherwise default to Prod
 // const CASHFREE_BASE_URL = process.env.CASHFREE_URL || "https://payout-api.cashfree.com/payout/v1";
@@ -56,7 +57,8 @@ export async function startCashfreeOnboarding(employee, bankAccountData) {
                 headers: {
                     "x-client-id": appId,
                     "x-client-secret": secretKey,
-                    "x-api-version": "2024-01-01", // Explicitly set version
+                    "x-api-version": "2024-01-01",
+                    "X-Cf-Signature": generateCashfreeSignature(appId),
                     "Content-Type": "application/json",
                 },
             }

@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import { encrypt, decrypt } from "../../utils/crypto.util.js";
+
+const ENCRYPTED_STRING_FIELDS = ["accountNumber", "ifscCode"];
 
 const bankAccountSchema = new mongoose.Schema(
   {
@@ -23,6 +26,26 @@ const bankAccountSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("BankAccount", bankAccountSchema);
+// Encrypt
+bankAccountSchema.pre("save", async function () {
+  for (const field of ENCRYPTED_STRING_FIELDS) {
+    if (this.isModified(field) && this[field]) {
+      this[field] = encrypt(this[field]);
+    }
+  }
+});
 
-// TODO: Add encryption when saving
+// Decrypt 
+bankAccountSchema.post("init", function () {
+  try {
+    for (const field of ENCRYPTED_STRING_FIELDS) {
+      if (this[field]) {
+        this[field] = decrypt(this[field]);
+      }
+    }
+  } catch (err) {
+    console.error("BankAccount decryption error:", err.message);
+  }
+});
+
+export default mongoose.model("BankAccount", bankAccountSchema);
