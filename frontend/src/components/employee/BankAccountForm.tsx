@@ -93,13 +93,13 @@ export default function BankAccountForm({
                         type="text"
                         value={formData.accountNumber}
                         onChange={(e) => handleChange("accountNumber", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900 ${errors.accountNumber ? "border-red-500" : "border-gray-300"
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 ${errors.accountNumber ? "border-red-500 dark:border-red-500" : ""
                             }`}
                         placeholder="1234567890"
                         disabled={isSubmitting}
                     />
                     {errors.accountNumber && (
-                        <p className="mt-1 text-sm text-red-600">{errors.accountNumber}</p>
+                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.accountNumber}</p>
                     )}
                 </div>
 
@@ -119,7 +119,7 @@ export default function BankAccountForm({
                         disabled={isSubmitting}
                     />
                     {errors.ifscCode && (
-                        <p className="mt-1 text-sm text-red-600">{errors.ifscCode}</p>
+                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.ifscCode}</p>
                     )}
                 </div>
 

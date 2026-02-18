@@ -78,8 +78,8 @@ export default function PricingPage() {
                             <div
                                 key={index}
                                 className={`relative rounded-2xl p-8 ${plan.highlighted
-                                        ? "bg-indigo-600 dark:bg-indigo-700 text-white shadow-2xl scale-105"
-                                        : "bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700"
+                                    ? "bg-indigo-600 dark:bg-indigo-700 text-white shadow-2xl scale-105"
+                                    : "bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700"
                                     }`}
                             >
                                 {plan.highlighted && (
@@ -98,14 +98,14 @@ export default function PricingPage() {
                                         {plan.name}
                                     </h3>
                                     <p
-                                        className={`text-sm mb-4 ${plan.highlighted ? "text-indigo-100" : "text-gray-600"
+                                        className={`text-sm mb-4 ${plan.highlighted ? "text-indigo-100" : "text-gray-600 dark:text-gray-300"
                                             }`}
                                     >
                                         {plan.description}
                                     </p>
                                     <div className="mb-4">
                                         <span
-                                            className={`text-4xl font-bold ${plan.highlighted ? "text-white" : "text-gray-900"
+                                            className={`text-4xl font-bold ${plan.highlighted ? "text-white" : "text-gray-900 dark:text-white"
                                                 }`}
                                         >
                                             {plan.price}
@@ -117,7 +117,7 @@ export default function PricingPage() {
                                     {plan.features.map((feature, featureIndex) => (
                                         <li key={featureIndex} className="flex items-start">
                                             <svg
-                                                className={`w-5 h-5 mr-2 mt-0.5 flex-shrink-0 ${plan.highlighted ? "text-white" : "text-green-500"
+                                                className={`w-5 h-5 mr-2 mt-0.5 flex-shrink-0 ${plan.highlighted ? "text-white" : "text-green-500 dark:text-green-400"
                                                     }`}
                                                 fill="currentColor"
                                                 viewBox="0 0 20 20"
@@ -130,7 +130,7 @@ export default function PricingPage() {
                                             </svg>
                                             <span
                                                 className={
-                                                    plan.highlighted ? "text-white" : "text-gray-600"
+                                                    plan.highlighted ? "text-white" : "text-gray-600 dark:text-gray-300"
                                                 }
                                             >
                                                 {feature}
@@ -142,8 +142,8 @@ export default function PricingPage() {
                                 <Link
                                     href="/contact"
                                     className={`block w-full py-3 px-6 rounded-xl font-semibold text-center transition-all duration-200 ${plan.highlighted
-                                            ? "bg-white text-indigo-600 hover:bg-gray-100"
-                                            : "bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white hover:shadow-lg"
+                                        ? "bg-white text-indigo-600 hover:bg-gray-100"
+                                        : "bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white hover:shadow-lg"
                                         }`}
                                 >
                                     {plan.price === "Custom" ? "Contact Sales" : "Get Started"}

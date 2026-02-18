@@ -9,6 +9,7 @@ import batchRoutes from "./routes/batches.routes.js"
 import googleAuthRoutes from "./routes/googleAuth.routes.js"
 import payrollRoutes from "./routes/payroll.routes.js";
 import employeeRoutes from "./routes/employee.routes.js";
+import contactRoutes from "./routes/contact.routes.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -25,11 +26,11 @@ const getAllowedOrigins = () => {
     "http://127.0.0.1:3000",
     "https://ai-hr-rose.vercel.app"
   ];
-  
+
   if (process.env.FRONTEND_URL) {
     origins.push(process.env.FRONTEND_URL);
   }
-  
+
   return origins;
 };
 
@@ -51,6 +52,7 @@ connectDB();
 //public routes
 app.use("/company", companyRoutes);
 app.use("/jobs", jobRoutes);
+app.use("/contact", contactRoutes);
 
 //private routes
 app.use("/candidates", candidateRoutes);

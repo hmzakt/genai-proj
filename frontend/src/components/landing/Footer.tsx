@@ -26,7 +26,7 @@ export default function Footer() {
                         </p>
                         <div className="flex space-x-4">
                             <a
-                                href="https://twitter.com"
+                                href="https://x.com/hmz_akt"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 bg-gray-800 hover:bg-indigo-600 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
@@ -36,7 +36,7 @@ export default function Footer() {
                                 </svg>
                             </a>
                             <a
-                                href="https://linkedin.com"
+                                href="https://www.linkedin.com/in/hmzakt/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 bg-gray-800 hover:bg-indigo-600 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
@@ -46,7 +46,7 @@ export default function Footer() {
                                 </svg>
                             </a>
                             <a
-                                href="https://github.com"
+                                href="https://github.com/hmzakt/genai-proj"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 bg-gray-800 hover:bg-indigo-600 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
@@ -143,26 +143,6 @@ export default function Footer() {
                         <p className="text-sm text-gray-400">
                             © {currentYear} HR AI Platform. All rights reserved.
                         </p>
-                        <div className="flex space-x-6 text-sm">
-                            <Link
-                                href="#"
-                                className="text-gray-400 hover:text-indigo-400 transition-colors"
-                            >
-                                Privacy Policy
-                            </Link>
-                            <Link
-                                href="#"
-                                className="text-gray-400 hover:text-indigo-400 transition-colors"
-                            >
-                                Terms of Service
-                            </Link>
-                            <Link
-                                href="#"
-                                className="text-gray-400 hover:text-indigo-400 transition-colors"
-                            >
-                                Cookie Policy
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </div>

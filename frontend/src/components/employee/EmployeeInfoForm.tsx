@@ -92,7 +92,7 @@ export default function EmployeeInfoForm({
                         placeholder="John Doe"
                     />
                     {errors.name && (
-                        <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
                     )}
                 </div>
 
@@ -104,12 +104,12 @@ export default function EmployeeInfoForm({
                         type="email"
                         value={formData.email}
                         onChange={(e) => handleChange("email", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900 ${errors.email ? "border-red-500" : "border-gray-300"
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 ${errors.email ? "border-red-500 dark:border-red-500" : "border-gray-300 dark:border-gray-600"
                             }`}
                         placeholder="john@example.com"
                     />
                     {errors.email && (
-                        <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
                     )}
                 </div>
 
@@ -147,11 +147,11 @@ export default function EmployeeInfoForm({
                         type="date"
                         value={formData.dateOfJoining}
                         onChange={(e) => handleChange("dateOfJoining", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900 ${errors.dateOfJoining ? "border-red-500" : "border-gray-300"
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.dateOfJoining ? "border-red-500 dark:border-red-500" : "border-gray-300 dark:border-gray-600"
                             }`}
                     />
                     {errors.dateOfJoining && (
-                        <p className="mt-1 text-sm text-red-600">{errors.dateOfJoining}</p>
+                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.dateOfJoining}</p>
                     )}
                 </div>
             </div>

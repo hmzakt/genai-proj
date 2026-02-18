@@ -139,7 +139,7 @@ export default function PayrollConfigForm({
                             }`}
                     />
                     {errors.effectiveFrom && (
-                        <p className="mt-1 text-sm text-red-600">{errors.effectiveFrom}</p>
+                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.effectiveFrom}</p>
                     )}
                 </div>
 
