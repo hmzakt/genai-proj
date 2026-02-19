@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
 
 export default function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -14,12 +15,7 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2">
-                        <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                            <span className="text-white font-bold text-lg">H</span>
-                        </div>
-                        <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400">
-                            HR AI Platform
-                        </span>
+                        <Image alt="logo" src={"/logo.png"} width={65} height={65} style={{ backgroundColor: 'transparent' }} />
                     </Link>
 
                     {/* Desktop Navigation */}

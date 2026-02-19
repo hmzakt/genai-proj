@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -12,8 +13,14 @@ export default function Footer() {
                     {/* Brand Section */}
                     <div className="col-span-1 md:col-span-2">
                         <div className="flex items-center space-x-2 mb-4">
-                            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                                <span className="text-white font-bold text-lg">H</span>
+                            <div className="w-10 h-10 flex items-center justify-center">
+                                <Image
+                                    alt="logo"
+                                    src="/logo.png"
+                                    width={40}
+                                    height={40}
+                                    className="object-contain"
+                                />
                             </div>
                             <span className="text-xl font-bold text-white">
                                 HR AI Platform

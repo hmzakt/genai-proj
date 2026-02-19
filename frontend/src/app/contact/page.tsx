@@ -110,7 +110,7 @@ export default function ContactPage() {
                                         value={formData.name}
                                         onChange={handleChange}
                                         className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition-all"
-                                        placeholder="John Doe"
+                                        placeholder="Full Name"
                                     />
                                 </div>
 
@@ -129,7 +129,7 @@ export default function ContactPage() {
                                         value={formData.email}
                                         onChange={handleChange}
                                         className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition-all"
-                                        placeholder="john@company.com"
+                                        placeholder="akt@company.com"
                                     />
                                 </div>
 
@@ -147,7 +147,7 @@ export default function ContactPage() {
                                         value={formData.company}
                                         onChange={handleChange}
                                         className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition-all"
-                                        placeholder="Acme Inc."
+                                        placeholder="Company Name"
                                     />
                                 </div>
 
