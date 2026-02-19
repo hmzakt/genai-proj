@@ -19,38 +19,49 @@ export async function executePayrollPayments(payrollRunId) {
         payrollRunId
     }).populate("employeeId");
 
+    let successCount = 0;
+    let failCount = 0;
+    let skipCount = 0;
+
     for (const item of payrollItems) {
         // Skip if already paid successfully
         const existingPayment = await PaymentLog.findOne({
             payrollItemId: item._id,
             status: "SUCCESS"
         });
-        if (existingPayment) continue;
+        if (existingPayment) {
+            skipCount++;
+            continue;
+        }
+
         try {
+            // Find the employee's primary bank account (relax verified/onboarding checks
+            // since the adapter will verify/re-create the beneficiary on Cashfree)
             const bankAccount = await BankAccount.findOne({
                 employeeId: item.employeeId._id,
                 isPrimary: true,
-                verified: true
             });
 
-            if (
-                !bankAccount ||
-                bankAccount.onboardingStatus !== "COMPLETE"
-            ) {
+            if (!bankAccount || !bankAccount.accountNumber || !bankAccount.ifscCode) {
+                console.warn(`No valid bank account for employee ${item.employeeId?.email || item.employeeId._id}. Marking PENDING_ONBOARDING.`);
                 await PaymentLog.create({
                     payrollItemId: item._id,
                     provider: "CASHFREE",
                     amount: item.netPay,
                     status: "PENDING_ONBOARDING",
-                    rawResponse: { reason: "Cashfree onboarding incomplete" },
+                    rawResponse: { reason: "No bank account or Cashfree beneficiary linked" },
                 });
+                failCount++;
                 continue;
             }
+
+            console.log(`Processing payment for ${item.employeeId?.email || item.employeeId._id}, amount: ${item.netPay}`);
 
             const response = await paymentAdapter.transfer({
                 amount: item.netPay,
                 bankAccount,
-                reference: item._id.toString()
+                reference: item._id.toString(),
+                employee: item.employeeId, // populated via .populate("employeeId")
             });
 
             await PaymentLog.create({
@@ -61,7 +72,11 @@ export async function executePayrollPayments(payrollRunId) {
                 status: response.success ? "SUCCESS" : "FAILED",
                 rawResponse: response.raw
             });
+
+            if (response.success) successCount++;
+            else failCount++;
         } catch (err) {
+            console.error(`Payment failed for employee ${item.employeeId?.email || item.employeeId._id}:`, err.message);
             await PaymentLog.create({
                 payrollItemId: item._id,
                 provider: "CASHFREE",
@@ -69,8 +84,11 @@ export async function executePayrollPayments(payrollRunId) {
                 status: "FAILED",
                 rawResponse: { error: err.message }
             });
+            failCount++;
         }
     }
+
+    console.log(`Payroll ${payrollRunId} complete: ${successCount} success, ${failCount} failed, ${skipCount} skipped (already paid)`);
     payrollRun.status = "PAID";
     await payrollRun.save();
 
