@@ -16,6 +16,11 @@ async function processResume(resumeUrl, jobDescription) {
         const response = await axios.post(aiProcessUrl, {
             resume_url: resumeUrl,
             job_description: jobDescription
+        }, {
+            timeout: 120000, // 120 seconds for PDF download, parsing, and AI processing
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
         console.log(` AI Service Response Status: ${response.status}`);
         console.log(` Result: ${JSON.stringify(response.data).substring(0, 100)}...`);
@@ -25,6 +30,10 @@ async function processResume(resumeUrl, jobDescription) {
         console.error(" AI Service Error:");
         console.error(`  Status: ${error.response?.status || 'N/A'}`);
         console.error(`  Message: ${error.message}`);
+        console.error(`  Code: ${error.code || 'N/A'}`);
+        if (error.code === 'ECONNABORTED') {
+            console.error(`  Details: Request timed out after 120 seconds`);
+        }
         console.error(`  Response: ${JSON.stringify(error.response?.data || {})}`);
         console.error("=".repeat(60) + "\n");
         throw error;

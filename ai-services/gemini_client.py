@@ -28,9 +28,16 @@ def analyze_resume(resume_text:str, job_description:str):
             RETURN ONLY VALID JSON, NO MARKDOWN
     """
     
+    # Add timeout configuration for Gemini API call
+    from google.genai import types
+    
     response = client.models.generate_content(
         model="gemini-2.5-flash",
-        contents=prompt
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            temperature=0.7,
+            max_output_tokens=2048,
+        )
     )
     return response.text
 

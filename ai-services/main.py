@@ -32,13 +32,23 @@ class ResumeRequest(BaseModel):
     resume_url:str
     job_description:str
 
+@app.get("/health")
+def health_check():
+    """Health check endpoint for monitoring and keeping service warm"""
+    return {
+        "status": "healthy",
+        "service": "ai-services",
+        "version": "1.0"
+    }
+
 @app.post("/process-resume")
 def process_resume(data:ResumeRequest):
     max_pdf_bytes = int(os.getenv("MAX_PDF_BYTES", "8000000"))
+    pdf_timeout = int(os.getenv("PDF_DOWNLOAD_TIMEOUT", "30"))  # Increased for production
     try:
         pdf_response = requests.get(
             data.resume_url,
-            timeout=20,
+            timeout=pdf_timeout,
             headers={"User-Agent": "Mozilla/5.0"},
         )
     except requests.RequestException as exc:
