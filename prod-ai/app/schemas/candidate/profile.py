@@ -9,7 +9,7 @@ from app.schemas.candidate.education import Education
 from app.schemas.candidate.enums import SeniorityLevel
 from app.schemas.candidate.experience import Experience
 from app.schemas.candidate.metadata import Metadata
-from app.schemas.candidate.project import Project
+from app.schemas.candidate.projects import Project
 from app.schemas.candidate.skill import Skill
 
 

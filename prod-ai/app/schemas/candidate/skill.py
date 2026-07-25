@@ -10,7 +10,7 @@ from app.schemas.candidate.enums import (
 
 from app.schemas.candidate.metadata import ConfidenceScore
 
-class skill(BaseSchema):
+class Skill(BaseSchema):
     """Representation of candidate skill"""
     
     name : str = Field(
